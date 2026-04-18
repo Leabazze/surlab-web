@@ -235,7 +235,7 @@ a.app-card:hover { transform: translateY(-3px); }
   color: var(--muted); font-size: 0.88rem;
   line-height: 1.65; font-weight: 300; flex: 1; margin-bottom: 1.5rem;
 }
-.app-footer { display: flex; align-items: center; justify-content: space-between; }
+.app-footer { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; flex-wrap: wrap; }
 .app-badge {
   font-size: 0.68rem; font-weight: 500;
   letter-spacing: 0.08em; text-transform: uppercase;
@@ -245,6 +245,25 @@ a.app-card:hover { transform: translateY(-3px); }
 .badge-dev  { color:#fbbf24; background:rgba(251,191,36,0.1);  border:1px solid rgba(251,191,36,0.2); }
 .app-arrow { color:var(--dim); font-size:1rem; transition:color 0.2s,transform 0.2s; }
 .app-card:hover .app-arrow { color:var(--muted); transform:translate(3px,-3px); }
+
+.app-links { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.app-link {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: 100px;
+  font-size: 0.72rem; font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.18s, background 0.18s, border-color 0.18s;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.02);
+  color: var(--text);
+  white-space: nowrap;
+}
+.app-link:hover { transform: translateY(-2px); border-color: var(--border-h); background: var(--bg3); }
+.app-link:active { transform: translateY(0); }
+.app-link svg { width: 13px; height: 13px; flex-shrink: 0; }
+.app-link.primary { background: var(--accent); border-color: var(--accent); color: #1a1a1a; }
+.app-link.primary:hover { background: var(--accent); opacity: 0.9; }
 
 /* SOBRE */
 .sobre-wrap {
@@ -366,6 +385,7 @@ footer p { color: var(--dim); font-size: 0.78rem; }
 }
 
 @media (max-width: 480px) {
+  .hero-left h1 { font-size: clamp(1.9rem, 8.5vw, 2.8rem); }
   .hero-counter { gap: 1.25rem; flex-wrap: wrap; }
   .hero-stat-num { font-size: 1.4rem; }
   .sobre-stats { grid-template-columns: 1fr; }
@@ -424,7 +444,7 @@ footer p { color: var(--dim); font-size: 0.78rem; }
     <h2 class="section-title fade-up" data-i18n="apps.title">Lo que construimos</h2>
     <p class="section-desc fade-up" data-i18n="apps.desc">Apps simples que resuelven problemas reales. Sin ruido, sin fricciones. Disponibles en web y Android.</p>
     <div class="apps-grid">
-      <a href="https://y-rho-woad.vercel.app" target="_blank" class="app-card app-card-big agenda fade-up">
+      <div class="app-card app-card-big agenda fade-up">
         <div class="card-screenshot">
           <img src="/screenshots/agenda.jpg" loading="lazy" alt="Simple Agenda">
         </div>
@@ -436,11 +456,20 @@ footer p { color: var(--dim); font-size: 0.78rem; }
           <p class="app-desc" data-i18n="apps.agenda.desc">Gestor de tareas limpio y directo. Organizá tu día sin distracciones.</p>
           <div class="app-footer">
             <span class="app-badge badge-live" data-i18n="badge.live">En vivo</span>
-            <span class="app-arrow">↗</span>
+            <div class="app-links">
+              <a href="https://y-rho-woad.vercel.app" target="_blank" rel="noopener" class="app-link" aria-label="Abrir Simple Agenda en el navegador">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                <span data-i18n="link.web">Web</span>
+              </a>
+              <a href="https://play.google.com/store/apps/details?id=com.surlab.simpleagenda" target="_blank" rel="noopener" class="app-link" aria-label="Ver Simple Agenda en Google Play">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.492 5.955 8.19-8.257zm3.583-2.033l2.908 1.649a1 1 0 0 1 0 1.753l-2.908 1.649-2.564-2.525 2.564-2.526zm-3.583-2.033L5.91 1.853 16.4 7.807l-2.302 2.302z"/></svg>
+                <span data-i18n="link.android">Android</span>
+              </a>
+            </div>
           </div>
         </div>
-      </a>
-      <a href="https://simple-notas.vercel.app" target="_blank" class="app-card app-card-big notas fade-up">
+      </div>
+      <div class="app-card app-card-big notas fade-up">
         <div class="card-screenshot">
           <img src="/screenshots/notas.jpg" loading="lazy" alt="Simple Notas">
         </div>
@@ -452,10 +481,19 @@ footer p { color: var(--dim); font-size: 0.78rem; }
           <p class="app-desc" data-i18n="apps.notas.desc">Notas con colores, checklists y fijado. Sincronizado con Google.</p>
           <div class="app-footer">
             <span class="app-badge badge-live" data-i18n="badge.live">En vivo</span>
-            <span class="app-arrow">↗</span>
+            <div class="app-links">
+              <a href="https://simple-notas.vercel.app" target="_blank" rel="noopener" class="app-link" aria-label="Abrir Simple Notas en el navegador">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                <span data-i18n="link.web">Web</span>
+              </a>
+              <a href="https://play.google.com/store/apps/details?id=com.surlab.simplenotas" target="_blank" rel="noopener" class="app-link" aria-label="Ver Simple Notas en Google Play">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.492 5.955 8.19-8.257zm3.583-2.033l2.908 1.649a1 1 0 0 1 0 1.753l-2.908 1.649-2.564-2.525 2.564-2.526zm-3.583-2.033L5.91 1.853 16.4 7.807l-2.302 2.302z"/></svg>
+                <span data-i18n="link.android">Android</span>
+              </a>
+            </div>
           </div>
         </div>
-      </a>
+      </div>
       <div class="app-card chartex fade-up">
         <div class="app-icon chartex" aria-hidden="true">◈</div>
         <div class="app-name">CHARTEX</div>
@@ -524,6 +562,7 @@ const i18n = {
     "apps.notas.desc":"Notas con colores, checklists y fijado. Todo sincronizado con tu cuenta de Google. Rápido y sin complicaciones.",
     "apps.chartex.desc":"Dashboard de análisis técnico para crypto. Multi-activo, multi-temporalidad. Indicadores avanzados y señales de confluencia.",
     "badge.live":"En vivo","badge.dev":"En desarrollo",
+    "link.web":"Web","link.android":"Android",
     "sobre.label":"Sobre SurLab","sobre.title":"Chicos.<br>Enfocados.",
     "sobre.p1":"Somos un estudio chico con foco en lo que hacemos. Cada app que lanzamos nace de querer resolver algo concreto, sin vueltas.",
     "sobre.p2":"No hacemos software por hacerlo. Usamos lo que construimos, y eso nos obliga a que funcione bien de verdad.",
@@ -544,6 +583,7 @@ const i18n = {
     "apps.notas.desc":"Notes with colors, checklists and pinning. Everything synced with your Google account. Fast and hassle-free.",
     "apps.chartex.desc":"Technical analysis dashboard for crypto. Multi-asset, multi-timeframe. Advanced indicators and confluence signals.",
     "badge.live":"Live","badge.dev":"In development",
+    "link.web":"Web","link.android":"Android",
     "sobre.label":"About SurLab","sobre.title":"Small.<br>Focused.",
     "sobre.p1":"We're a small studio that stays focused on what we do. Every app we launch comes from wanting to solve something real, no shortcuts.",
     "sobre.p2":"We don't build software for the sake of it. We use what we make, and that keeps us honest.",
