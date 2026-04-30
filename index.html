@@ -197,7 +197,7 @@ section { padding: 7rem 2.5rem; }
 /* APPS */
 .apps-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.1rem;
   align-items: start;
 }
@@ -216,6 +216,8 @@ section { padding: 7rem 2.5rem; }
 .app-card.agenda::before  { background: linear-gradient(90deg,transparent,#6ee7b7,transparent); }
 .app-card.notas::before   { background: linear-gradient(90deg,transparent,#93c5fd,transparent); }
 .app-card.chartex::before { background: linear-gradient(90deg,transparent,#fbbf24,transparent); }
+.app-card.presu::before   { background: linear-gradient(90deg,transparent,#86efac,transparent); }
+.app-card.espectro::before{ background: linear-gradient(90deg,transparent,#f87171,transparent); }
 .app-card:hover { border-color: var(--border-h); background: var(--bg3); }
 a.app-card:hover { transform: translateY(-3px); }
 .app-card:hover::before { opacity: 1; }
@@ -227,6 +229,8 @@ a.app-card:hover { transform: translateY(-3px); }
 .app-icon.agenda  { background: rgba(110,231,183,0.11); }
 .app-icon.notas   { background: rgba(147,197,253,0.11); }
 .app-icon.chartex { background: rgba(251,191,36,0.11); }
+.app-icon.presu   { background: rgba(134,239,172,0.13); }
+.app-icon.espectro{ background: linear-gradient(90deg,rgba(248,113,113,0.13),rgba(147,197,253,0.13)); }
 .app-name {
   font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 800;
   color: var(--text); margin-bottom: 0.45rem; letter-spacing: -0.01em;
@@ -286,6 +290,119 @@ a.app-card:hover { transform: translateY(-3px); }
   color: var(--text); letter-spacing: -0.03em; line-height: 1; margin-bottom: 0.35rem;
 }
 .stat-label { font-size: 0.78rem; color: var(--muted); font-weight: 300; }
+
+/* SERVICIOS */
+#servicios { background: var(--bg2); }
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.1rem;
+  margin-top: 1rem;
+}
+.service-card {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: var(--r); padding: 1.85rem;
+  display: flex; flex-direction: column;
+  transition: border-color 0.25s, transform 0.25s;
+  position: relative;
+}
+.service-card:hover { border-color: var(--border-h); transform: translateY(-2px); }
+.service-card.featured {
+  border-color: rgba(240,192,96,0.3);
+  background: linear-gradient(180deg, rgba(240,192,96,0.04), var(--bg3));
+}
+.service-tag {
+  position: absolute; top: 1.25rem; right: 1.25rem;
+  font-size: 0.62rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-dim);
+  border: 1px solid rgba(240,192,96,0.2);
+  padding: 0.22rem 0.6rem; border-radius: 100px;
+}
+.service-icon {
+  width: 38px; height: 38px; border-radius: 9px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px; margin-bottom: 1.25rem;
+}
+.service-name {
+  font-family: 'Syne', sans-serif; font-size: 1.15rem; font-weight: 800;
+  color: var(--text); margin-bottom: 0.5rem; letter-spacing: -0.01em;
+}
+.service-desc {
+  color: var(--muted); font-size: 0.86rem;
+  line-height: 1.65; font-weight: 300; flex: 1; margin-bottom: 1.25rem;
+}
+.service-features {
+  list-style: none; margin-bottom: 1.5rem;
+  display: flex; flex-direction: column; gap: 0.5rem;
+}
+.service-features li {
+  font-size: 0.78rem; color: var(--muted);
+  display: flex; align-items: flex-start; gap: 0.5rem;
+  line-height: 1.5;
+}
+.service-features li::before {
+  content: '→'; color: var(--accent); flex-shrink: 0;
+  font-weight: 700;
+}
+.service-price {
+  margin-top: auto;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+}
+.service-price-from {
+  font-size: 0.7rem; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 0.1em;
+  margin-bottom: 0.3rem; font-weight: 500;
+}
+.service-price-amount {
+  font-family: 'Syne', sans-serif; font-size: 1.45rem; font-weight: 800;
+  color: var(--text); letter-spacing: -0.02em;
+}
+.service-price-amount span {
+  font-family: 'DM Sans', sans-serif; font-size: 0.78rem;
+  color: var(--muted); font-weight: 400;
+  margin-left: 0.3rem; letter-spacing: 0;
+}
+
+/* PROCESO */
+.process-wrap {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.process-step {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--r); padding: 1.5rem;
+  position: relative;
+}
+.process-num {
+  font-family: 'Syne', sans-serif; font-size: 0.78rem; font-weight: 800;
+  color: var(--accent); letter-spacing: 0.08em; margin-bottom: 0.65rem;
+}
+.process-title {
+  font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 800;
+  color: var(--text); margin-bottom: 0.4rem; letter-spacing: -0.01em;
+}
+.process-desc {
+  font-size: 0.82rem; color: var(--muted);
+  line-height: 1.55; font-weight: 300;
+}
+
+/* PRODUCTOS section: ajuste para que se lea como "trabajos propios" */
+.products-intro {
+  display: flex; align-items: center; gap: 0.65rem;
+  margin-bottom: 1rem;
+  font-size: 0.85rem; color: var(--muted);
+  font-style: italic; font-weight: 300;
+}
+.products-intro::before {
+  content: ''; width: 30px; height: 1px; background: var(--accent); opacity: 0.5;
+}
 
 /* CONTACTO */
 #contacto { background: var(--bg2); }
@@ -398,6 +515,7 @@ footer p { color: var(--dim); font-size: 0.78rem; }
   <a href="#" class="nav-logo">Sur<span>Lab</span></a>
   <div class="nav-right">
     <ul class="nav-links">
+      <li><a href="#servicios" data-i18n="nav.services">Servicios</a></li>
       <li><a href="#apps" data-i18n="nav.products">Productos</a></li>
       <li><a href="#sobre" data-i18n="nav.about">Nosotros</a></li>
       <li><a href="#contacto" data-i18n="nav.contact">Contacto</a></li>
@@ -411,23 +529,23 @@ footer p { color: var(--dim); font-size: 0.78rem; }
 
 <section class="hero">
   <div class="hero-left">
-    <h1 data-i18n-html="hero.h1">Construimos<br>productos<br><em>que duran.</em></h1>
+    <h1 data-i18n-html="hero.h1">Webs y apps<br><em>bien hechas.</em></h1>
     <div class="hero-line"></div>
   </div>
   <div class="hero-right">
-    <p class="hero-sub" data-i18n="hero.sub">Hacemos apps que la gente realmente usa. Sin complicaciones, sin relleno. Solo software que resuelve algo.</p>
+    <p class="hero-sub" data-i18n="hero.sub">Diseño y desarrollo profesional para comercios, profesionales y PyMEs argentinas. Código propio, performance real, sin atajos.</p>
     <div class="hero-actions">
-      <a href="#apps" class="btn-primary" data-i18n="hero.cta1">Ver productos →</a>
-      <a href="#contacto" class="btn-ghost" data-i18n="hero.cta2">Escribinos</a>
+      <a href="#servicios" class="btn-primary" data-i18n="hero.cta1">Ver servicios →</a>
+      <a href="#contacto" class="btn-ghost" data-i18n="hero.cta2">Pedir presupuesto</a>
     </div>
     <div class="hero-counter">
       <div>
-        <div class="hero-stat-num">2</div>
-        <div class="hero-stat-label" data-i18n="stat.products">Productos lanzados</div>
+        <div class="hero-stat-num">3+</div>
+        <div class="hero-stat-label" data-i18n="stat.projects">Proyectos en producción</div>
       </div>
       <div>
-        <div class="hero-stat-num">2</div>
-        <div class="hero-stat-label" data-i18n="stat.apps">Apps en Play Store</div>
+        <div class="hero-stat-num">4</div>
+        <div class="hero-stat-label" data-i18n="stat.products">Productos propios</div>
       </div>
       <div>
         <div class="hero-stat-num">∞</div>
@@ -438,11 +556,160 @@ footer p { color: var(--dim); font-size: 0.78rem; }
   </div>
 </section>
 
+<section id="servicios">
+  <div class="section-inner">
+    <p class="section-label fade-up" data-i18n="services.label">Servicios</p>
+    <h2 class="section-title fade-up" data-i18n="services.title">Lo que hacemos para vos</h2>
+    <p class="section-desc fade-up" data-i18n="services.desc">Desarrollamos sitios y aplicaciones a medida, con código propio y stack moderno. Sin plantillas, sin atajos, sin sorpresas en el camino.</p>
+    <div class="services-grid">
+
+      <div class="service-card fade-up">
+        <div class="service-icon" aria-hidden="true">◐</div>
+        <div class="service-name">Landing page</div>
+        <p class="service-desc" data-i18n="srv.landing.desc">Una página, todo lo importante. Para profesionales, lanzamientos o productos.</p>
+        <ul class="service-features">
+          <li data-i18n="srv.landing.f1">Diseño exclusivo, no plantilla</li>
+          <li data-i18n="srv.landing.f2">Optimizada para Google y mobile</li>
+          <li data-i18n="srv.landing.f3">Formulario de contacto integrado</li>
+          <li data-i18n="srv.landing.f4">Entrega en 7-15 días</li>
+        </ul>
+        <div class="service-price">
+          <div class="service-price-from" data-i18n="srv.from">Desde</div>
+          <div class="service-price-amount">$500.000<span>ARS</span></div>
+        </div>
+      </div>
+
+      <div class="service-card featured fade-up">
+        <span class="service-tag" data-i18n="srv.popular">Más pedido</span>
+        <div class="service-icon" aria-hidden="true">▦</div>
+        <div class="service-name">Sitio institucional</div>
+        <p class="service-desc" data-i18n="srv.institucional.desc">Web completa para tu empresa. Servicios, portfolio, contacto, todo bien organizado.</p>
+        <ul class="service-features">
+          <li data-i18n="srv.institucional.f1">5-8 secciones, diseño a medida</li>
+          <li data-i18n="srv.institucional.f2">Panel de admin para que actualices vos</li>
+          <li data-i18n="srv.institucional.f3">SEO técnico desde el día 1</li>
+          <li data-i18n="srv.institucional.f4">Entrega en 15-30 días</li>
+        </ul>
+        <div class="service-price">
+          <div class="service-price-from" data-i18n="srv.from">Desde</div>
+          <div class="service-price-amount">$1.200.000<span>ARS</span></div>
+        </div>
+      </div>
+
+      <div class="service-card fade-up">
+        <div class="service-icon" aria-hidden="true">⊞</div>
+        <div class="service-name">Tienda online</div>
+        <p class="service-desc" data-i18n="srv.tienda.desc">E-commerce con carrito, pagos y envíos. Listo para vender desde el primer día.</p>
+        <ul class="service-features">
+          <li data-i18n="srv.tienda.f1">Catálogo, carrito y checkout</li>
+          <li data-i18n="srv.tienda.f2">Mercado Pago + transferencia</li>
+          <li data-i18n="srv.tienda.f3">Gestión de stock y pedidos</li>
+          <li data-i18n="srv.tienda.f4">Entrega en 30-45 días</li>
+        </ul>
+        <div class="service-price">
+          <div class="service-price-from" data-i18n="srv.from">Desde</div>
+          <div class="service-price-amount">$1.800.000<span>ARS</span></div>
+        </div>
+      </div>
+
+      <div class="service-card fade-up">
+        <div class="service-icon" aria-hidden="true">⌬</div>
+        <div class="service-name">Aplicación a medida</div>
+        <p class="service-desc" data-i18n="srv.app.desc">Software propio para resolver un problema específico. Web app, dashboard interno, sistema de gestión.</p>
+        <ul class="service-features">
+          <li data-i18n="srv.app.f1">Análisis de requerimientos incluido</li>
+          <li data-i18n="srv.app.f2">Login, base de datos, panel admin</li>
+          <li data-i18n="srv.app.f3">Despliegue y capacitación</li>
+          <li data-i18n="srv.app.f4">Cotización personalizada</li>
+        </ul>
+        <div class="service-price">
+          <div class="service-price-from" data-i18n="srv.from">Desde</div>
+          <div class="service-price-amount">$3.500.000<span>ARS</span></div>
+        </div>
+      </div>
+
+      <div class="service-card fade-up">
+        <div class="service-icon" aria-hidden="true">◇</div>
+        <div class="service-name">Hosting + mantenimiento</div>
+        <p class="service-desc" data-i18n="srv.hosting.desc">Que tu web esté siempre online, rápida y segura. Nosotros nos encargamos de todo.</p>
+        <ul class="service-features">
+          <li data-i18n="srv.hosting.f1">Hosting premium (Vercel/Firebase)</li>
+          <li data-i18n="srv.hosting.f2">Backups y monitoreo 24/7</li>
+          <li data-i18n="srv.hosting.f3">Actualizaciones de contenido</li>
+          <li data-i18n="srv.hosting.f4">Soporte por WhatsApp/email</li>
+        </ul>
+        <div class="service-price">
+          <div class="service-price-from" data-i18n="srv.from">Desde</div>
+          <div class="service-price-amount">$45.000<span>ARS / mes</span></div>
+        </div>
+      </div>
+
+      <div class="service-card fade-up">
+        <div class="service-icon" aria-hidden="true">⚯</div>
+        <div class="service-name">SEO técnico</div>
+        <p class="service-desc" data-i18n="srv.seo.desc">Para que Google te encuentre y los clientes te elijan. Optimización real, no humo.</p>
+        <ul class="service-features">
+          <li data-i18n="srv.seo.f1">Auditoría inicial completa</li>
+          <li data-i18n="srv.seo.f2">Optimización on-page</li>
+          <li data-i18n="srv.seo.f3">Reporte mensual de posiciones</li>
+          <li data-i18n="srv.seo.f4">Mejora continua</li>
+        </ul>
+        <div class="service-price">
+          <div class="service-price-from" data-i18n="srv.from">Desde</div>
+          <div class="service-price-amount">$180.000<span>ARS / mes</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="section-desc fade-up" style="margin-top: 3rem; font-size: 0.85rem; opacity: 0.7;" data-i18n="services.disclaimer">Los precios son orientativos. Cada proyecto se cotiza según alcance y necesidades. Aceptamos transferencia, MercadoPago y dólares.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="proceso">
+  <div class="section-inner">
+    <p class="section-label fade-up" data-i18n="process.label">Proceso</p>
+    <h2 class="section-title fade-up" data-i18n="process.title">Cómo trabajamos</h2>
+    <p class="section-desc fade-up" data-i18n="process.desc">Sin promesas vagas ni sorpresas. Cada proyecto sigue el mismo proceso claro.</p>
+    <div class="process-wrap">
+      <div class="process-step fade-up">
+        <div class="process-num">01</div>
+        <div class="process-title" data-i18n="proc.1.title">Charla inicial</div>
+        <div class="process-desc" data-i18n="proc.1.desc">Nos contás qué necesitás. Sin compromiso, sin venderte humo.</div>
+      </div>
+      <div class="process-step fade-up">
+        <div class="process-num">02</div>
+        <div class="process-title" data-i18n="proc.2.title">Propuesta</div>
+        <div class="process-desc" data-i18n="proc.2.desc">Cotización por escrito con alcance, plazos y precio cerrado.</div>
+      </div>
+      <div class="process-step fade-up">
+        <div class="process-num">03</div>
+        <div class="process-title" data-i18n="proc.3.title">Diseño</div>
+        <div class="process-desc" data-i18n="proc.3.desc">Te mostramos cómo se va a ver antes de programar nada.</div>
+      </div>
+      <div class="process-step fade-up">
+        <div class="process-num">04</div>
+        <div class="process-title" data-i18n="proc.4.title">Desarrollo</div>
+        <div class="process-desc" data-i18n="proc.4.desc">Programamos con código propio, no con plantillas armadas.</div>
+      </div>
+      <div class="process-step fade-up">
+        <div class="process-num">05</div>
+        <div class="process-title" data-i18n="proc.5.title">Lanzamiento</div>
+        <div class="process-desc" data-i18n="proc.5.desc">Publicamos, te capacitamos, y seguimos disponibles.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
 <section id="apps">
   <div class="section-inner">
-    <p class="section-label fade-up" data-i18n="apps.label">Productos</p>
-    <h2 class="section-title fade-up" data-i18n="apps.title">Lo que construimos</h2>
-    <p class="section-desc fade-up" data-i18n="apps.desc">Apps simples que resuelven problemas reales. Sin ruido, sin fricciones. Disponibles en web y Android.</p>
+    <p class="section-label fade-up" data-i18n="apps.label">Productos propios</p>
+    <h2 class="section-title fade-up" data-i18n="apps.title">Lo que construimos para nosotros</h2>
+    <p class="section-desc fade-up" data-i18n="apps.desc">Cuando no estamos haciendo proyectos para clientes, construimos software propio. Es nuestro laboratorio: ahí aprendemos, probamos, y traemos esa experiencia a cada proyecto que hacemos.</p>
     <div class="apps-grid">
       <div class="app-card app-card-big agenda fade-up">
         <div class="card-screenshot">
@@ -494,6 +761,48 @@ footer p { color: var(--dim); font-size: 0.78rem; }
           </div>
         </div>
       </div>
+      <div class="app-card app-card-big presu fade-up">
+        <div class="card-screenshot">
+          <img src="/screenshots/presuarg.jpg" loading="lazy" alt="PresuArg">
+        </div>
+        <div class="card-body">
+          <div class="card-top">
+            <div class="app-icon presu" aria-hidden="true">$</div>
+            <div class="app-name">PresuArg</div>
+          </div>
+          <p class="app-desc" data-i18n="apps.presu.desc">Presupuesto Nacional 2026 explicado de verdad. Mirá en qué gasta el Estado, de dónde sale la plata y simulá recortes.</p>
+          <div class="app-footer">
+            <span class="app-badge badge-live" data-i18n="badge.live">En vivo</span>
+            <div class="app-links">
+              <a href="https://presuarg.com" target="_blank" rel="noopener" class="app-link" aria-label="Abrir PresuArg en el navegador">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                <span data-i18n="link.web">Web</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="app-card app-card-big espectro fade-up">
+        <div class="card-screenshot">
+          <img src="/screenshots/espectro.jpg" loading="lazy" alt="Espectro">
+        </div>
+        <div class="card-body">
+          <div class="card-top">
+            <div class="app-icon espectro" aria-hidden="true">◉</div>
+            <div class="app-name">Espectro</div>
+          </div>
+          <p class="app-desc" data-i18n="apps.espectro.desc">Lector de columnistas argentinos con análisis de espectro político. Detectá el sesgo de cada nota antes de leerla.</p>
+          <div class="app-footer">
+            <span class="app-badge badge-live" data-i18n="badge.live">En vivo</span>
+            <div class="app-links">
+              <a href="https://espectro-five.vercel.app" target="_blank" rel="noopener" class="app-link" aria-label="Abrir Espectro en el navegador">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                <span data-i18n="link.web">Web</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="app-card chartex fade-up">
         <div class="app-icon chartex" aria-hidden="true">◈</div>
         <div class="app-name">CHARTEX</div>
@@ -515,14 +824,14 @@ footer p { color: var(--dim); font-size: 0.78rem; }
         <p class="section-label fade-up" data-i18n="sobre.label">Sobre SurLab</p>
         <h2 class="section-title fade-up" data-i18n-html="sobre.title">Chicos.<br>Enfocados.</h2>
         <div class="sobre-text fade-up">
-          <p data-i18n="sobre.p1">Somos un estudio chico con foco en lo que hacemos. Cada app que lanzamos nace de querer resolver algo concreto, sin vueltas.</p>
-          <p data-i18n="sobre.p2">No hacemos software por hacerlo. Usamos lo que construimos, y eso nos obliga a que funcione bien de verdad.</p>
-          <p data-i18n-html="sobre.p3">Operamos desde <strong>La Plata, Argentina</strong>, con stack moderno: Firebase, Vercel y Android.</p>
+          <p data-i18n="sobre.p1">Somos un estudio chico con foco en lo que hacemos. Cada proyecto que tomamos lo hacemos como si fuera nuestro.</p>
+          <p data-i18n="sobre.p2">No usamos plantillas, no tercerizamos código, no improvisamos. Lo que entregamos funciona, se mantiene, y se nota la diferencia.</p>
+          <p data-i18n-html="sobre.p3">Operamos desde <strong>La Plata, Argentina</strong>, con stack moderno: Firebase, Vercel, Next.js, Android.</p>
         </div>
       </div>
       <div class="sobre-stats fade-up">
-        <div class="stat-box"><div class="stat-num">2</div><div class="stat-label" data-i18n="stat.products">Productos lanzados</div></div>
-        <div class="stat-box"><div class="stat-num">2</div><div class="stat-label" data-i18n="stat.apps">Apps en Play Store</div></div>
+        <div class="stat-box"><div class="stat-num">3+</div><div class="stat-label" data-i18n="stat.projects">Proyectos en producción</div></div>
+        <div class="stat-box"><div class="stat-num">4</div><div class="stat-label" data-i18n="stat.products">Productos propios</div></div>
         <div class="stat-box"><div class="stat-num">∞</div><div class="stat-label" data-i18n="stat.code">Líneas de código</div></div>
         <div class="stat-box"><div class="stat-num">1</div><div class="stat-label" data-i18n="stat.studio">Estudio, todo el foco</div></div>
       </div>
@@ -551,45 +860,119 @@ footer p { color: var(--dim); font-size: 0.78rem; }
 <script>
 const i18n = {
   es: {
-    "nav.products":"Productos","nav.about":"Nosotros","nav.contact":"Contacto",
+    "nav.services":"Servicios","nav.products":"Productos","nav.about":"Nosotros","nav.contact":"Contacto",
     "hero.tag":"Hecho en La Plata, Argentina 🧉",
-    "hero.h1":"Construimos<br>productos<br><em>que duran.</em>",
-    "hero.sub":"Hacemos apps que la gente realmente usa. Sin complicaciones, sin relleno. Solo software que resuelve algo.",
-    "hero.cta1":"Ver productos →","hero.cta2":"Escribinos",
-    "apps.label":"Productos","apps.title":"Lo que construimos",
-    "apps.desc":"Apps simples que resuelven problemas reales. Sin ruido, sin fricciones. Disponibles en web y Android.",
+    "hero.h1":"Webs y apps<br><em>bien hechas.</em>",
+    "hero.sub":"Diseño y desarrollo profesional para comercios, profesionales y PyMEs argentinas. Código propio, performance real, sin atajos.",
+    "hero.cta1":"Ver servicios →","hero.cta2":"Pedir presupuesto",
+
+    "services.label":"Servicios","services.title":"Lo que hacemos para vos",
+    "services.desc":"Desarrollamos sitios y aplicaciones a medida, con código propio y stack moderno. Sin plantillas, sin atajos, sin sorpresas en el camino.",
+    "services.disclaimer":"Los precios son orientativos. Cada proyecto se cotiza según alcance y necesidades. Aceptamos transferencia, MercadoPago y dólares.",
+    "srv.from":"Desde","srv.popular":"Más pedido",
+    "srv.landing.desc":"Una página, todo lo importante. Para profesionales, lanzamientos o productos.",
+    "srv.landing.f1":"Diseño exclusivo, no plantilla","srv.landing.f2":"Optimizada para Google y mobile",
+    "srv.landing.f3":"Formulario de contacto integrado","srv.landing.f4":"Entrega en 7-15 días",
+    "srv.institucional.desc":"Web completa para tu empresa. Servicios, portfolio, contacto, todo bien organizado.",
+    "srv.institucional.f1":"5-8 secciones, diseño a medida","srv.institucional.f2":"Panel de admin para que actualices vos",
+    "srv.institucional.f3":"SEO técnico desde el día 1","srv.institucional.f4":"Entrega en 15-30 días",
+    "srv.tienda.desc":"E-commerce con carrito, pagos y envíos. Listo para vender desde el primer día.",
+    "srv.tienda.f1":"Catálogo, carrito y checkout","srv.tienda.f2":"Mercado Pago + transferencia",
+    "srv.tienda.f3":"Gestión de stock y pedidos","srv.tienda.f4":"Entrega en 30-45 días",
+    "srv.app.desc":"Software propio para resolver un problema específico. Web app, dashboard interno, sistema de gestión.",
+    "srv.app.f1":"Análisis de requerimientos incluido","srv.app.f2":"Login, base de datos, panel admin",
+    "srv.app.f3":"Despliegue y capacitación","srv.app.f4":"Cotización personalizada",
+    "srv.hosting.desc":"Que tu web esté siempre online, rápida y segura. Nosotros nos encargamos de todo.",
+    "srv.hosting.f1":"Hosting premium (Vercel/Firebase)","srv.hosting.f2":"Backups y monitoreo 24/7",
+    "srv.hosting.f3":"Actualizaciones de contenido","srv.hosting.f4":"Soporte por WhatsApp/email",
+    "srv.seo.desc":"Para que Google te encuentre y los clientes te elijan. Optimización real, no humo.",
+    "srv.seo.f1":"Auditoría inicial completa","srv.seo.f2":"Optimización on-page",
+    "srv.seo.f3":"Reporte mensual de posiciones","srv.seo.f4":"Mejora continua",
+
+    "process.label":"Proceso","process.title":"Cómo trabajamos",
+    "process.desc":"Sin promesas vagas ni sorpresas. Cada proyecto sigue el mismo proceso claro.",
+    "proc.1.title":"Charla inicial","proc.1.desc":"Nos contás qué necesitás. Sin compromiso, sin venderte humo.",
+    "proc.2.title":"Propuesta","proc.2.desc":"Cotización por escrito con alcance, plazos y precio cerrado.",
+    "proc.3.title":"Diseño","proc.3.desc":"Te mostramos cómo se va a ver antes de programar nada.",
+    "proc.4.title":"Desarrollo","proc.4.desc":"Programamos con código propio, no con plantillas armadas.",
+    "proc.5.title":"Lanzamiento","proc.5.desc":"Publicamos, te capacitamos, y seguimos disponibles.",
+
+    "apps.label":"Productos propios","apps.title":"Lo que construimos para nosotros",
+    "apps.desc":"Cuando no estamos haciendo proyectos para clientes, construimos software propio. Es nuestro laboratorio: ahí aprendemos, probamos, y traemos esa experiencia a cada proyecto que hacemos.",
     "apps.agenda.desc":"Gestor de tareas limpio y directo. Organiza tu día sin distracciones. Con sincronización en la nube y modo oscuro.",
     "apps.notas.desc":"Notas con colores, checklists y fijado. Todo sincronizado con tu cuenta de Google. Rápido y sin complicaciones.",
+    "apps.presu.desc":"Presupuesto Nacional 2026 explicado de verdad. Mirá en qué gasta el Estado, de dónde sale la plata y simulá recortes.",
+    "apps.espectro.desc":"Lector de columnistas argentinos con análisis de espectro político. Detectá el sesgo de cada nota antes de leerla.",
     "apps.chartex.desc":"Dashboard de análisis técnico para crypto. Multi-activo, multi-temporalidad. Indicadores avanzados y señales de confluencia.",
     "badge.live":"En vivo","badge.dev":"En desarrollo",
     "link.web":"Web","link.android":"Android",
+
     "sobre.label":"Sobre SurLab","sobre.title":"Chicos.<br>Enfocados.",
-    "sobre.p1":"Somos un estudio chico con foco en lo que hacemos. Cada app que lanzamos nace de querer resolver algo concreto, sin vueltas.",
-    "sobre.p2":"No hacemos software por hacerlo. Usamos lo que construimos, y eso nos obliga a que funcione bien de verdad.",
-    "sobre.p3":"Operamos desde <strong>La Plata, Argentina</strong>, con stack moderno: Firebase, Vercel y Android.",
-    "stat.products":"Productos lanzados","stat.apps":"Apps en Play Store","stat.code":"Líneas de código","stat.studio":"Estudio, todo el foco",
-    "contact.title":"¿Hablamos?","contact.desc":"Tenés una idea, un proyecto, o simplemente querés ver qué hacemos. Escribinos, respondemos rápido.",
+    "sobre.p1":"Somos un estudio chico con foco en lo que hacemos. Cada proyecto que tomamos lo hacemos como si fuera nuestro.",
+    "sobre.p2":"No usamos plantillas, no tercerizamos código, no improvisamos. Lo que entregamos funciona, se mantiene, y se nota la diferencia.",
+    "sobre.p3":"Operamos desde <strong>La Plata, Argentina</strong>, con stack moderno: Firebase, Vercel, Next.js, Android.",
+    "stat.projects":"Proyectos en producción","stat.products":"Productos propios","stat.apps":"Apps en Play Store",
+    "stat.code":"Líneas de código","stat.studio":"Estudio, todo el foco",
+
+    "contact.title":"¿Hablamos?","contact.desc":"Tenés un proyecto, una idea, o querés saber cuánto te saldría. Escribinos, respondemos rápido.",
     "footer.copy":"© 2026 SurLab · La Plata, Argentina"
   },
   en: {
-    "nav.products":"Products","nav.about":"About","nav.contact":"Contact",
+    "nav.services":"Services","nav.products":"Products","nav.about":"About","nav.contact":"Contact",
     "hero.tag":"Made in La Plata, Argentina 🧉",
-    "hero.h1":"We build<br>products<br><em>that last.</em>",
-    "hero.sub":"We make apps people actually use. No fluff, no filler. Just software that solves something.",
-    "hero.cta1":"See products →","hero.cta2":"Get in touch",
-    "apps.label":"Products","apps.title":"What we build",
-    "apps.desc":"Simple apps that solve real problems. No noise, no friction. Available on web and Android.",
+    "hero.h1":"Websites and apps<br><em>done right.</em>",
+    "hero.sub":"Professional design and development for Argentine businesses, professionals and SMEs. Custom code, real performance, no shortcuts.",
+    "hero.cta1":"See services →","hero.cta2":"Get a quote",
+
+    "services.label":"Services","services.title":"What we do for you",
+    "services.desc":"We build custom sites and applications with our own code and modern stack. No templates, no shortcuts, no surprises along the way.",
+    "services.disclaimer":"Prices are estimates. Each project is quoted based on scope and needs. We accept bank transfer, MercadoPago, and USD.",
+    "srv.from":"From","srv.popular":"Most popular",
+    "srv.landing.desc":"One page, everything that matters. For professionals, launches or products.",
+    "srv.landing.f1":"Custom design, never a template","srv.landing.f2":"Optimized for Google and mobile",
+    "srv.landing.f3":"Built-in contact form","srv.landing.f4":"Delivery in 7-15 days",
+    "srv.institucional.desc":"Complete website for your company. Services, portfolio, contact — all well organized.",
+    "srv.institucional.f1":"5-8 sections, custom design","srv.institucional.f2":"Admin panel so you can update content",
+    "srv.institucional.f3":"Technical SEO from day one","srv.institucional.f4":"Delivery in 15-30 days",
+    "srv.tienda.desc":"E-commerce with cart, payments and shipping. Ready to sell from day one.",
+    "srv.tienda.f1":"Catalog, cart and checkout","srv.tienda.f2":"Mercado Pago + bank transfer",
+    "srv.tienda.f3":"Stock and order management","srv.tienda.f4":"Delivery in 30-45 days",
+    "srv.app.desc":"Custom software to solve a specific problem. Web app, internal dashboard, management system.",
+    "srv.app.f1":"Requirements analysis included","srv.app.f2":"Login, database, admin panel",
+    "srv.app.f3":"Deployment and training","srv.app.f4":"Custom quote",
+    "srv.hosting.desc":"Keep your site online, fast and secure. We handle everything.",
+    "srv.hosting.f1":"Premium hosting (Vercel/Firebase)","srv.hosting.f2":"Backups and 24/7 monitoring",
+    "srv.hosting.f3":"Content updates","srv.hosting.f4":"WhatsApp/email support",
+    "srv.seo.desc":"So Google finds you and clients pick you. Real optimization, not smoke.",
+    "srv.seo.f1":"Complete initial audit","srv.seo.f2":"On-page optimization",
+    "srv.seo.f3":"Monthly ranking reports","srv.seo.f4":"Continuous improvement",
+
+    "process.label":"Process","process.title":"How we work",
+    "process.desc":"No vague promises, no surprises. Every project follows the same clear process.",
+    "proc.1.title":"Initial chat","proc.1.desc":"You tell us what you need. No commitment, no fluff.",
+    "proc.2.title":"Proposal","proc.2.desc":"Written quote with scope, deadlines and fixed price.",
+    "proc.3.title":"Design","proc.3.desc":"We show you how it will look before writing any code.",
+    "proc.4.title":"Development","proc.4.desc":"We code from scratch, never from templates.",
+    "proc.5.title":"Launch","proc.5.desc":"We deploy, train you, and stay available.",
+
+    "apps.label":"Our own products","apps.title":"What we build for ourselves",
+    "apps.desc":"When we're not working on client projects, we build our own software. It's our lab: where we learn, experiment, and bring that experience back to every project we do.",
     "apps.agenda.desc":"Clean and straightforward task manager. Organize your day without distractions. Cloud sync and dark mode included.",
     "apps.notas.desc":"Notes with colors, checklists and pinning. Everything synced with your Google account. Fast and hassle-free.",
+    "apps.presu.desc":"Argentina's 2026 National Budget, finally explained. See where the money goes, where it comes from, and simulate cuts.",
+    "apps.espectro.desc":"Argentine columnist reader with political spectrum analysis. Spot the bias of each piece before reading it.",
     "apps.chartex.desc":"Technical analysis dashboard for crypto. Multi-asset, multi-timeframe. Advanced indicators and confluence signals.",
     "badge.live":"Live","badge.dev":"In development",
     "link.web":"Web","link.android":"Android",
+
     "sobre.label":"About SurLab","sobre.title":"Small.<br>Focused.",
-    "sobre.p1":"We're a small studio that stays focused on what we do. Every app we launch comes from wanting to solve something real, no shortcuts.",
-    "sobre.p2":"We don't build software for the sake of it. We use what we make, and that keeps us honest.",
-    "sobre.p3":"Based in <strong>La Plata, Argentina</strong>, with a modern stack: Firebase, Vercel and Android.",
-    "stat.products":"Products launched","stat.apps":"Apps on Play Store","stat.code":"Lines of code","stat.studio":"One studio, full focus",
-    "contact.title":"Let's talk","contact.desc":"Got an idea, a project, or just want to see what we're about. Write to us, we reply fast.",
+    "sobre.p1":"We're a small studio focused on what we do. Every project we take on, we treat as our own.",
+    "sobre.p2":"We don't use templates, we don't outsource code, we don't improvise. What we deliver works, lasts, and the difference shows.",
+    "sobre.p3":"Based in <strong>La Plata, Argentina</strong>, with a modern stack: Firebase, Vercel, Next.js, Android.",
+    "stat.projects":"Projects in production","stat.products":"Own products","stat.apps":"Apps on Play Store",
+    "stat.code":"Lines of code","stat.studio":"One studio, full focus",
+
+    "contact.title":"Let's talk","contact.desc":"You have a project, an idea, or want to know how much it would cost. Write to us, we reply fast.",
     "footer.copy":"© 2026 SurLab · La Plata, Argentina"
   }
 };
