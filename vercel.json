@@ -1,5 +1,4 @@
 {
-  "outputDirectory": ".",
   "rewrites": [
     { "source": "/screenshots/:file", "destination": "/public/screenshots/:file" }
   ]
