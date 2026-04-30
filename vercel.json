@@ -1,4 +1,10 @@
 {
+  "outputDirectory": ".",
+  "functions": {
+    "api/lead.js": {
+      "runtime": "nodejs20.x"
+    }
+  },
   "rewrites": [
     { "source": "/screenshots/:file", "destination": "/public/screenshots/:file" }
   ]
