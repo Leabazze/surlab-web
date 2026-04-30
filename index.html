@@ -404,6 +404,245 @@ a.app-card:hover { transform: translateY(-3px); }
   content: ''; width: 30px; height: 1px; background: var(--accent); opacity: 0.5;
 }
 
+/* === SECCIÓN PROPUESTA DE VALOR (NUEVA) === */
+#captacion {
+  background: linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
+  text-align: center;
+}
+.captacion-headline {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  margin-bottom: 1.3rem;
+  color: var(--text);
+}
+.captacion-headline em {
+  font-style: italic; color: var(--accent); font-weight: 800;
+}
+.captacion-sub {
+  max-width: 620px; margin: 0 auto 2.5rem;
+  font-size: 1.05rem; color: var(--muted);
+  line-height: 1.7; font-weight: 300;
+}
+.captacion-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.1rem;
+  max-width: 900px; margin: 0 auto 2.5rem;
+}
+.captacion-feature {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--r); padding: 1.5rem;
+  text-align: left;
+}
+.captacion-feature-icon {
+  font-size: 1.4rem; margin-bottom: 0.7rem; display: block;
+}
+.captacion-feature-title {
+  font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 800;
+  color: var(--text); margin-bottom: 0.35rem;
+}
+.captacion-feature-desc {
+  font-size: 0.82rem; color: var(--muted); line-height: 1.55; font-weight: 300;
+}
+.captacion-cta {
+  display: inline-block; margin-top: 0.5rem;
+  font-size: 0.9rem; color: var(--accent);
+  background: var(--accent-dim);
+  border: 1px solid rgba(240,192,96,0.3);
+  padding: 0.85rem 1.6rem; border-radius: 100px;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s;
+}
+.captacion-cta:hover { background: rgba(240,192,96,0.18); }
+.captacion-hint {
+  margin-top: 1.5rem; font-size: 0.85rem; color: var(--muted);
+  font-style: italic; opacity: 0.8;
+}
+.captacion-hint::before { content: '↘ '; color: var(--accent); font-style: normal; }
+
+/* === FLOATING WHATSAPP BUTTON === */
+.wa-float {
+  position: fixed;
+  bottom: 24px; right: 24px;
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: #25D366;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+  cursor: pointer; z-index: 9998;
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+}
+.wa-float:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 28px rgba(37,211,102,0.55);
+}
+.wa-float svg { width: 28px; height: 28px; fill: white; }
+.wa-float-pulse {
+  position: absolute; inset: 0; border-radius: 50%;
+  background: #25D366;
+  animation: wa-pulse 2s ease-out infinite;
+  z-index: -1;
+}
+@keyframes wa-pulse {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* === BOT CHATBOT === */
+.bot-toggle {
+  position: fixed;
+  bottom: 24px; right: 92px;
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(240,192,96,0.45);
+  cursor: pointer; z-index: 9998;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: none; color: var(--bg);
+}
+.bot-toggle:hover { transform: scale(1.08); }
+.bot-toggle svg { width: 26px; height: 26px; }
+.bot-toggle .close-icon { display: none; }
+.bot-toggle.active .chat-icon { display: none; }
+.bot-toggle.active .close-icon { display: block; }
+
+.bot-window {
+  position: fixed;
+  bottom: 92px; right: 24px;
+  width: 360px; max-width: calc(100vw - 48px);
+  height: 520px; max-height: calc(100vh - 130px);
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: 0 12px 50px rgba(0,0,0,0.5);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  z-index: 9999;
+  transform: translateY(20px) scale(0.95);
+  opacity: 0; pointer-events: none;
+  transition: transform 0.25s, opacity 0.25s;
+}
+.bot-window.open {
+  transform: translateY(0) scale(1);
+  opacity: 1; pointer-events: all;
+}
+.bot-header {
+  background: var(--bg3);
+  padding: 1rem 1.2rem;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 0.8rem;
+}
+.bot-avatar {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Syne', sans-serif; font-weight: 800;
+  color: var(--bg); font-size: 0.95rem;
+}
+.bot-header-text strong {
+  display: block; font-family: 'Syne', sans-serif;
+  font-size: 0.95rem; color: var(--text);
+}
+.bot-header-text span {
+  font-size: 0.72rem; color: var(--muted);
+  display: flex; align-items: center; gap: 0.3rem;
+}
+.bot-header-text span::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: #4ade80; display: inline-block;
+}
+.bot-messages {
+  flex: 1; overflow-y: auto; padding: 1rem;
+  display: flex; flex-direction: column; gap: 0.7rem;
+}
+.bot-msg {
+  max-width: 85%; padding: 0.7rem 0.95rem;
+  border-radius: 14px; font-size: 0.88rem;
+  line-height: 1.45; animation: msg-in 0.3s ease-out;
+}
+@keyframes msg-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.bot-msg.bot {
+  background: var(--bg3);
+  color: var(--text);
+  border-top-left-radius: 4px;
+  align-self: flex-start;
+}
+.bot-msg.user {
+  background: var(--accent);
+  color: var(--bg);
+  border-top-right-radius: 4px;
+  align-self: flex-end; font-weight: 500;
+}
+.bot-options {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin-top: 0.3rem;
+}
+.bot-option {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+  font-family: inherit; font-size: 0.85rem;
+  text-align: left; cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+.bot-option:hover {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.bot-input-area {
+  padding: 0.8rem; border-top: 1px solid var(--border);
+  background: var(--bg3);
+  display: flex; flex-direction: column; gap: 0.5rem;
+}
+.bot-input-area input {
+  width: 100%; padding: 0.7rem 0.95rem;
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 10px; color: var(--text);
+  font-family: inherit; font-size: 0.88rem;
+}
+.bot-input-area input:focus {
+  outline: none; border-color: var(--accent);
+}
+.bot-submit {
+  background: #25D366; color: white;
+  border: none; padding: 0.85rem;
+  border-radius: 10px;
+  font-family: inherit; font-size: 0.9rem; font-weight: 600;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+}
+.bot-submit:hover { background: #1DA851; }
+.bot-submit svg { width: 16px; height: 16px; fill: white; }
+.bot-disclaimer {
+  text-align: center; padding: 0.5rem;
+  font-size: 0.68rem; color: var(--muted);
+  border-top: 1px solid var(--border);
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+  .bot-window {
+    bottom: 80px; right: 12px; left: 12px;
+    width: auto; height: 70vh;
+  }
+  .wa-float, .bot-toggle {
+    width: 50px; height: 50px;
+  }
+  .bot-toggle { right: 78px; bottom: 18px; }
+  .wa-float { bottom: 18px; right: 18px; }
+}
+
 /* CONTACTO */
 #contacto { background: var(--bg2); }
 .contact-box {
@@ -556,6 +795,44 @@ footer p { color: var(--dim); font-size: 0.78rem; }
   </div>
 </section>
 
+<div class="divider"></div>
+
+<section id="captacion">
+  <div class="section-inner">
+    <p class="section-label fade-up" data-i18n="captacion.label">Lo que nos diferencia</p>
+    <h2 class="captacion-headline fade-up" data-i18n-html="captacion.headline">No vendemos webs.<br>Vendemos <em>clientes.</em></h2>
+    <p class="captacion-sub fade-up" data-i18n="captacion.sub">Tu web tiene que trabajar para vos, no quedarse esperando. Cada proyecto incluye sistema de captación: bot inteligente, WhatsApp integrado y formularios calificados. Listo para convertir visitas en consultas, 24/7.</p>
+
+    <div class="captacion-features">
+      <div class="captacion-feature fade-up">
+        <span class="captacion-feature-icon">🤖</span>
+        <div class="captacion-feature-title" data-i18n="captacion.f1.title">Bot 24/7</div>
+        <div class="captacion-feature-desc" data-i18n="captacion.f1.desc">Responde dudas, califica leads y los pasa a WhatsApp. Sin cliente perdido por horario.</div>
+      </div>
+      <div class="captacion-feature fade-up">
+        <span class="captacion-feature-icon">📱</span>
+        <div class="captacion-feature-title" data-i18n="captacion.f2.title">WhatsApp directo</div>
+        <div class="captacion-feature-desc" data-i18n="captacion.f2.desc">Botón visible en toda la web. Mensaje pre-armado. El cliente te escribe en 2 clicks.</div>
+      </div>
+      <div class="captacion-feature fade-up">
+        <span class="captacion-feature-icon">📊</span>
+        <div class="captacion-feature-title" data-i18n="captacion.f3.title">Leads calificados</div>
+        <div class="captacion-feature-desc" data-i18n="captacion.f3.desc">El bot pide nombre, rubro y necesidad antes de pasártelo. Solo te llegan los serios.</div>
+      </div>
+      <div class="captacion-feature fade-up">
+        <span class="captacion-feature-icon">⚡</span>
+        <div class="captacion-feature-title" data-i18n="captacion.f4.title">Setup rápido</div>
+        <div class="captacion-feature-desc" data-i18n="captacion.f4.desc">Lo activamos en tu web en 1 semana. Sin plataformas pagas, sin marca de terceros.</div>
+      </div>
+    </div>
+
+    <a href="#" onclick="document.getElementById('botToggle').click(); return false;" class="captacion-cta" data-i18n="captacion.cta">💬 Probá nuestro bot ahora →</a>
+    <p class="captacion-hint fade-up" data-i18n="captacion.hint">Mirá abajo a la derecha. Lo que ves en nuestra web, lo armamos para vos.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
 <section id="servicios">
   <div class="section-inner">
     <p class="section-label fade-up" data-i18n="services.label">Servicios</p>
@@ -657,6 +934,57 @@ footer p { color: var(--dim); font-size: 0.78rem; }
         <div class="service-price">
           <div class="service-price-from" data-i18n="srv.from">Desde</div>
           <div class="service-price-amount">$180.000<span>ARS / mes</span></div>
+        </div>
+      </div>
+
+      <div class="service-card fade-up">
+        <div class="service-icon" aria-hidden="true">🤖</div>
+        <div class="service-name" data-i18n="srv.bot.name">Bot conversacional</div>
+        <p class="service-desc" data-i18n="srv.bot.desc">Asistente 24/7 que captura leads en tu web. Responde preguntas frecuentes, califica al cliente y lo pasa a WhatsApp.</p>
+        <ul class="service-features">
+          <li data-i18n="srv.bot.f1">Diseño a medida (no plataforma genérica)</li>
+          <li data-i18n="srv.bot.f2">Flujos según tu rubro y servicios</li>
+          <li data-i18n="srv.bot.f3">Integración con WhatsApp y mail</li>
+          <li data-i18n="srv.bot.f4">Sin marca de terceros</li>
+        </ul>
+        <div class="service-price">
+          <div class="service-price-from" data-i18n="srv.from">Desde</div>
+          <div class="service-price-amount">$400.000<span>ARS</span></div>
+        </div>
+      </div>
+
+      <div class="service-card fade-up">
+        <div class="service-icon" aria-hidden="true">📱</div>
+        <div class="service-name" data-i18n="srv.wa.name">WhatsApp Business</div>
+        <p class="service-desc" data-i18n="srv.wa.desc">Integración profesional de WhatsApp con respuestas automáticas, plantillas y notificaciones.</p>
+        <ul class="service-features">
+          <li data-i18n="srv.wa.f1">Botón flotante en toda la web</li>
+          <li data-i18n="srv.wa.f2">Mensajes pre-armados según sección</li>
+          <li data-i18n="srv.wa.f3">Auto-respuestas fuera de horario</li>
+          <li data-i18n="srv.wa.f4">Tracking de origen del lead</li>
+        </ul>
+        <div class="service-price">
+          <div class="service-price-from" data-i18n="srv.from">Desde</div>
+          <div class="service-price-amount">$600.000<span>ARS + $30k/mes</span></div>
+        </div>
+      </div>
+
+      <div class="service-card featured fade-up" style="grid-column: 1 / -1;">
+        <span class="service-tag" data-i18n="srv.featured">Recomendado</span>
+        <div class="service-icon" aria-hidden="true">🎯</div>
+        <div class="service-name" data-i18n="srv.full.name">Sistema completo de captación</div>
+        <p class="service-desc" data-i18n="srv.full.desc">Web profesional + Bot + WhatsApp + Hosting + SEO básico. Todo el sistema funcionando, listo para captar clientes desde el día 1.</p>
+        <ul class="service-features" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.5rem;">
+          <li data-i18n="srv.full.f1">Sitio institucional o tienda online</li>
+          <li data-i18n="srv.full.f2">Bot conversacional integrado</li>
+          <li data-i18n="srv.full.f3">WhatsApp Business + automatizaciones</li>
+          <li data-i18n="srv.full.f4">Hosting premium + mantenimiento</li>
+          <li data-i18n="srv.full.f5">SEO técnico inicial + reporte mensual</li>
+          <li data-i18n="srv.full.f6">Soporte prioritario por WhatsApp</li>
+        </ul>
+        <div class="service-price">
+          <div class="service-price-from" data-i18n="srv.from">Desde</div>
+          <div class="service-price-amount">$2.500.000<span>ARS + $80k/mes</span></div>
         </div>
       </div>
 
@@ -869,7 +1197,21 @@ const i18n = {
     "services.label":"Servicios","services.title":"Lo que hacemos para vos",
     "services.desc":"Desarrollamos sitios y aplicaciones a medida, con código propio y stack moderno. Sin plantillas, sin atajos, sin sorpresas en el camino.",
     "services.disclaimer":"Los precios son orientativos. Cada proyecto se cotiza según alcance y necesidades. Aceptamos transferencia, MercadoPago y dólares.",
-    "srv.from":"Desde","srv.popular":"Más pedido",
+    "srv.from":"Desde","srv.popular":"Más pedido","srv.featured":"Recomendado",
+
+    "captacion.label":"Lo que nos diferencia",
+    "captacion.headline":"No vendemos webs.<br>Vendemos <em>clientes.</em>",
+    "captacion.sub":"Tu web tiene que trabajar para vos, no quedarse esperando. Cada proyecto incluye sistema de captación: bot inteligente, WhatsApp integrado y formularios calificados. Listo para convertir visitas en consultas, 24/7.",
+    "captacion.f1.title":"Bot 24/7",
+    "captacion.f1.desc":"Responde dudas, califica leads y los pasa a WhatsApp. Sin cliente perdido por horario.",
+    "captacion.f2.title":"WhatsApp directo",
+    "captacion.f2.desc":"Botón visible en toda la web. Mensaje pre-armado. El cliente te escribe en 2 clicks.",
+    "captacion.f3.title":"Leads calificados",
+    "captacion.f3.desc":"El bot pide nombre, rubro y necesidad antes de pasártelo. Solo te llegan los serios.",
+    "captacion.f4.title":"Setup rápido",
+    "captacion.f4.desc":"Lo activamos en tu web en 1 semana. Sin plataformas pagas, sin marca de terceros.",
+    "captacion.cta":"💬 Probá nuestro bot ahora →",
+    "captacion.hint":"Mirá abajo a la derecha. Lo que ves en nuestra web, lo armamos para vos.",
     "srv.landing.desc":"Una página, todo lo importante. Para profesionales, lanzamientos o productos.",
     "srv.landing.f1":"Diseño exclusivo, no plantilla","srv.landing.f2":"Optimizada para Google y mobile",
     "srv.landing.f3":"Formulario de contacto integrado","srv.landing.f4":"Entrega en 7-15 días",
@@ -888,6 +1230,19 @@ const i18n = {
     "srv.seo.desc":"Para que Google te encuentre y los clientes te elijan. Optimización real, no humo.",
     "srv.seo.f1":"Auditoría inicial completa","srv.seo.f2":"Optimización on-page",
     "srv.seo.f3":"Reporte mensual de posiciones","srv.seo.f4":"Mejora continua",
+    "srv.bot.name":"Bot conversacional",
+    "srv.bot.desc":"Asistente 24/7 que captura leads en tu web. Responde preguntas frecuentes, califica al cliente y lo pasa a WhatsApp.",
+    "srv.bot.f1":"Diseño a medida (no plataforma genérica)","srv.bot.f2":"Flujos según tu rubro y servicios",
+    "srv.bot.f3":"Integración con WhatsApp y mail","srv.bot.f4":"Sin marca de terceros",
+    "srv.wa.name":"WhatsApp Business",
+    "srv.wa.desc":"Integración profesional de WhatsApp con respuestas automáticas, plantillas y notificaciones.",
+    "srv.wa.f1":"Botón flotante en toda la web","srv.wa.f2":"Mensajes pre-armados según sección",
+    "srv.wa.f3":"Auto-respuestas fuera de horario","srv.wa.f4":"Tracking de origen del lead",
+    "srv.full.name":"Sistema completo de captación",
+    "srv.full.desc":"Web profesional + Bot + WhatsApp + Hosting + SEO básico. Todo el sistema funcionando, listo para captar clientes desde el día 1.",
+    "srv.full.f1":"Sitio institucional o tienda online","srv.full.f2":"Bot conversacional integrado",
+    "srv.full.f3":"WhatsApp Business + automatizaciones","srv.full.f4":"Hosting premium + mantenimiento",
+    "srv.full.f5":"SEO técnico inicial + reporte mensual","srv.full.f6":"Soporte prioritario por WhatsApp",
 
     "process.label":"Proceso","process.title":"Cómo trabajamos",
     "process.desc":"Sin promesas vagas ni sorpresas. Cada proyecto sigue el mismo proceso claro.",
@@ -927,7 +1282,21 @@ const i18n = {
     "services.label":"Services","services.title":"What we do for you",
     "services.desc":"We build custom sites and applications with our own code and modern stack. No templates, no shortcuts, no surprises along the way.",
     "services.disclaimer":"Prices are estimates. Each project is quoted based on scope and needs. We accept bank transfer, MercadoPago, and USD.",
-    "srv.from":"From","srv.popular":"Most popular",
+    "srv.from":"From","srv.popular":"Most popular","srv.featured":"Recommended",
+
+    "captacion.label":"What sets us apart",
+    "captacion.headline":"We don't sell websites.<br>We sell <em>clients.</em>",
+    "captacion.sub":"Your website should work for you, not just sit there. Every project includes a lead-capture system: smart bot, integrated WhatsApp, and qualified forms. Ready to turn visits into conversations, 24/7.",
+    "captacion.f1.title":"24/7 bot",
+    "captacion.f1.desc":"Answers questions, qualifies leads and passes them to WhatsApp. No client lost to off-hours.",
+    "captacion.f2.title":"Direct WhatsApp",
+    "captacion.f2.desc":"Visible button on the whole site. Pre-written message. Clients reach you in 2 clicks.",
+    "captacion.f3.title":"Qualified leads",
+    "captacion.f3.desc":"The bot asks for name, industry and needs before sending them. Only serious leads get through.",
+    "captacion.f4.title":"Quick setup",
+    "captacion.f4.desc":"Live on your site in 1 week. No paid platforms, no third-party branding.",
+    "captacion.cta":"💬 Try our bot now →",
+    "captacion.hint":"Look at the bottom right. What you see on our site, we build for you.",
     "srv.landing.desc":"One page, everything that matters. For professionals, launches or products.",
     "srv.landing.f1":"Custom design, never a template","srv.landing.f2":"Optimized for Google and mobile",
     "srv.landing.f3":"Built-in contact form","srv.landing.f4":"Delivery in 7-15 days",
@@ -946,6 +1315,19 @@ const i18n = {
     "srv.seo.desc":"So Google finds you and clients pick you. Real optimization, not smoke.",
     "srv.seo.f1":"Complete initial audit","srv.seo.f2":"On-page optimization",
     "srv.seo.f3":"Monthly ranking reports","srv.seo.f4":"Continuous improvement",
+    "srv.bot.name":"Conversational bot",
+    "srv.bot.desc":"24/7 assistant that captures leads on your site. Answers FAQ, qualifies clients and passes them to WhatsApp.",
+    "srv.bot.f1":"Custom-designed (not generic platform)","srv.bot.f2":"Flows tailored to your industry",
+    "srv.bot.f3":"WhatsApp and email integration","srv.bot.f4":"No third-party branding",
+    "srv.wa.name":"WhatsApp Business",
+    "srv.wa.desc":"Professional WhatsApp integration with auto-replies, templates and notifications.",
+    "srv.wa.f1":"Floating button across your site","srv.wa.f2":"Pre-written messages per section",
+    "srv.wa.f3":"Off-hours auto-replies","srv.wa.f4":"Lead source tracking",
+    "srv.full.name":"Complete lead-capture system",
+    "srv.full.desc":"Professional website + Bot + WhatsApp + Hosting + Basic SEO. Full system running, ready to capture clients from day one.",
+    "srv.full.f1":"Institutional site or online store","srv.full.f2":"Integrated conversational bot",
+    "srv.full.f3":"WhatsApp Business + automations","srv.full.f4":"Premium hosting + maintenance",
+    "srv.full.f5":"Initial SEO + monthly reports","srv.full.f6":"Priority WhatsApp support",
 
     "process.label":"Process","process.title":"How we work",
     "process.desc":"No vague promises, no surprises. Every project follows the same clear process.",
@@ -1015,5 +1397,232 @@ const obs = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
 </script>
+
+<!-- =================================================================== -->
+<!-- 💬 BOT CONVERSACIONAL + WHATSAPP                                    -->
+<!-- =================================================================== -->
+
+<!-- WhatsApp Floating Button -->
+<a href="#" id="waFloat" class="wa-float" aria-label="Abrir WhatsApp">
+  <span class="wa-float-pulse"></span>
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.607zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+  </svg>
+</a>
+
+<!-- Bot Toggle Button -->
+<button id="botToggle" class="bot-toggle" aria-label="Abrir asistente">
+  <svg class="chat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+  </svg>
+  <svg class="close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+  </svg>
+</button>
+
+<!-- Bot Window -->
+<div id="botWindow" class="bot-window" role="dialog" aria-label="Asistente SurLab">
+  <div class="bot-header">
+    <div class="bot-avatar">SL</div>
+    <div class="bot-header-text">
+      <strong>SurLab Asistente</strong>
+      <span>Online · Respuesta inmediata</span>
+    </div>
+  </div>
+  <div id="botMessages" class="bot-messages"></div>
+  <div id="botInputArea" class="bot-input-area" style="display:none;">
+    <input type="text" id="botInputName" placeholder="Tu nombre" autocomplete="name">
+    <input type="tel" id="botInputPhone" placeholder="WhatsApp (ej: 11 1234 5678)" autocomplete="tel">
+    <button id="botSubmit" class="bot-submit">
+      <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24z"/></svg>
+      Continuar por WhatsApp
+    </button>
+  </div>
+  <div class="bot-disclaimer">Powered by SurLab · Respuesta humana en menos de 24hs</div>
+</div>
+
+<script>
+// ===================================================================
+// CONFIGURACIÓN — cambiar aquí el número de WhatsApp
+// ===================================================================
+const SURLAB_WHATSAPP = '5492215796854'; // Sin +, sin espacios
+const SURLAB_WA_DEFAULT_MSG = 'Hola SurLab! Vi su web y quería consultarles sobre sus servicios.';
+
+// ===================================================================
+// BOTÓN FLOTANTE DE WHATSAPP
+// ===================================================================
+document.getElementById('waFloat').addEventListener('click', (e) => {
+  e.preventDefault();
+  const url = `https://wa.me/${SURLAB_WHATSAPP}?text=${encodeURIComponent(SURLAB_WA_DEFAULT_MSG)}`;
+  window.open(url, '_blank');
+});
+
+// ===================================================================
+// BOT CONVERSACIONAL
+// ===================================================================
+const botFlow = {
+  start: {
+    msg: '¡Hola! 👋 Soy el asistente de SurLab. ¿En qué te puedo ayudar?',
+    options: [
+      { text: '🌐 Quiero una web nueva', next: 'tipoWeb' },
+      { text: '💰 Ver precios', next: 'precios' },
+      { text: '🤖 Bot + WhatsApp para mi negocio', next: 'sistemaCaptacion' },
+      { text: '💬 Hablar con SurLab', next: 'contacto' }
+    ]
+  },
+  tipoWeb: {
+    msg: 'Genial. ¿Qué tipo de web necesitás?',
+    options: [
+      { text: '📄 Landing page (1 página)', next: 'landingInfo' },
+      { text: '🏢 Sitio institucional (varias secciones)', next: 'institucionalInfo' },
+      { text: '🛒 Tienda online', next: 'tiendaInfo' },
+      { text: '🤔 No estoy seguro', next: 'contacto' }
+    ]
+  },
+  landingInfo: {
+    msg: 'Una landing page es ideal para profesionales o productos puntuales. La armamos en 7-15 días desde $500.000 ARS, con diseño exclusivo y optimizada para Google.\n\n¿Querés que te contactemos para charlar?',
+    options: [
+      { text: '✅ Sí, contactenme', next: 'capturaLead', context: 'landing' },
+      { text: '🔙 Volver al menú', next: 'start' }
+    ]
+  },
+  institucionalInfo: {
+    msg: 'Un sitio institucional incluye 5-8 secciones, panel de admin para que actualices vos, y SEO técnico desde el día 1. Lo entregamos en 15-30 días desde $1.200.000 ARS.\n\n¿Te contactamos para cotizar tu caso puntual?',
+    options: [
+      { text: '✅ Sí, contactenme', next: 'capturaLead', context: 'institucional' },
+      { text: '🔙 Volver al menú', next: 'start' }
+    ]
+  },
+  tiendaInfo: {
+    msg: 'Una tienda online incluye carrito, Mercado Pago, gestión de stock y pedidos. La entregamos en 30-45 días desde $1.800.000 ARS. Sin comisiones recurrentes como Mercado Libre.\n\n¿Te contactamos para charlar de tu negocio?',
+    options: [
+      { text: '✅ Sí, contactenme', next: 'capturaLead', context: 'tienda' },
+      { text: '🔙 Volver al menú', next: 'start' }
+    ]
+  },
+  precios: {
+    msg: 'Tenemos precios desde:\n\n📄 Landing: $500.000\n🏢 Institucional: $1.200.000\n🛒 Tienda online: $1.800.000\n🤖 Bot conversacional: $400.000\n📱 WhatsApp Business: $600.000\n🎯 Sistema completo: $2.500.000\n\nTodos los precios son ARS. ¿Querés que te pase una cotización detallada?',
+    options: [
+      { text: '✅ Sí, cotización personalizada', next: 'capturaLead', context: 'cotizacion' },
+      { text: '🔙 Ver servicios primero', next: 'start' }
+    ]
+  },
+  sistemaCaptacion: {
+    msg: 'Tremendo, es nuestro servicio estrella. 🎯\n\nLo que ves acá (este bot + el botón de WhatsApp) lo armamos integrado a tu web. Funciona 24/7, captura leads, los califica y te los pasa por WhatsApp.\n\nSistema completo (Web + Bot + WhatsApp + Hosting + SEO): desde $2.500.000 ARS + $80.000/mes.\n\n¿Te interesa que te contactemos?',
+    options: [
+      { text: '✅ Sí, quiero esto para mi negocio', next: 'capturaLead', context: 'sistema' },
+      { text: '🔙 Volver al menú', next: 'start' }
+    ]
+  },
+  contacto: {
+    msg: '¡Genial! Dejanos tus datos y te contactamos por WhatsApp en menos de 24hs. Sin compromiso, sin venderte humo.',
+    options: [],
+    showInput: true,
+    context: 'contacto-general'
+  },
+  capturaLead: {
+    msg: 'Perfecto. Dejanos tu nombre y WhatsApp y te escribimos en menos de 24hs.',
+    options: [],
+    showInput: true
+  }
+};
+
+let currentContext = 'general';
+const messagesEl = document.getElementById('botMessages');
+const inputArea = document.getElementById('botInputArea');
+const botToggle = document.getElementById('botToggle');
+const botWindow = document.getElementById('botWindow');
+
+function addBotMsg(text) {
+  const div = document.createElement('div');
+  div.className = 'bot-msg bot';
+  div.innerText = text;
+  messagesEl.appendChild(div);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+}
+
+function addUserMsg(text) {
+  const div = document.createElement('div');
+  div.className = 'bot-msg user';
+  div.innerText = text;
+  messagesEl.appendChild(div);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+}
+
+function showOptions(options) {
+  const wrap = document.createElement('div');
+  wrap.className = 'bot-options';
+  options.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'bot-option';
+    btn.innerText = opt.text;
+    btn.addEventListener('click', () => {
+      addUserMsg(opt.text);
+      wrap.remove();
+      if (opt.context) currentContext = opt.context;
+      setTimeout(() => goToStep(opt.next), 400);
+    });
+    wrap.appendChild(btn);
+  });
+  messagesEl.appendChild(wrap);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+}
+
+function goToStep(stepName) {
+  const step = botFlow[stepName];
+  if (!step) return;
+  if (step.context) currentContext = step.context;
+  addBotMsg(step.msg);
+  if (step.showInput) {
+    setTimeout(() => { inputArea.style.display = 'flex'; }, 500);
+  } else {
+    inputArea.style.display = 'none';
+    if (step.options && step.options.length) {
+      setTimeout(() => showOptions(step.options), 500);
+    }
+  }
+}
+
+// Toggle del bot
+botToggle.addEventListener('click', () => {
+  const isOpen = botWindow.classList.toggle('open');
+  botToggle.classList.toggle('active', isOpen);
+  if (isOpen && messagesEl.children.length === 0) {
+    setTimeout(() => goToStep('start'), 300);
+  }
+});
+
+// Submit del formulario → abre WhatsApp con datos
+document.getElementById('botSubmit').addEventListener('click', () => {
+  const name = document.getElementById('botInputName').value.trim();
+  const phone = document.getElementById('botInputPhone').value.trim();
+  if (!name) {
+    document.getElementById('botInputName').focus();
+    return;
+  }
+  // Construir mensaje contextual
+  let msg = `Hola SurLab! Soy ${name}`;
+  if (phone) msg += ` (WhatsApp: ${phone})`;
+  msg += '. Vine desde su web y me interesa: ';
+  const contextMap = {
+    'landing': 'una landing page para mi negocio',
+    'institucional': 'un sitio institucional',
+    'tienda': 'una tienda online',
+    'sistema': 'el sistema completo de captación (Web + Bot + WhatsApp)',
+    'cotizacion': 'recibir una cotización personalizada',
+    'contacto-general': 'consultar sobre sus servicios'
+  };
+  msg += contextMap[currentContext] || 'sus servicios';
+  msg += '. ¿Cuándo podemos hablar?';
+
+  const url = `https://wa.me/${SURLAB_WHATSAPP}?text=${encodeURIComponent(msg)}`;
+  window.open(url, '_blank');
+
+  // Confirmación en el bot
+  inputArea.style.display = 'none';
+  addBotMsg(`¡Gracias ${name}! 🎉\n\nSe abrió WhatsApp con un mensaje listo para que nos lo mandes. Si no se abrió, podés escribirnos al +54 9 221 579-6854.\n\nTe respondemos en menos de 24hs.`);
+});
+</script>
+
 </body>
 </html>
