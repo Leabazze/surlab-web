@@ -884,6 +884,19 @@ footer p { color: var(--dim); font-size: 0.78rem; }
 .app-card-big:hover .card-screenshot img {
   transform: scale(1.03);
 }
+/* PresuArg y Espectro: screenshots panorámicos, dejamos que la altura siga al ratio real
+   en vez de forzar 280px y recortar los costados. */
+.app-card.presu .card-screenshot,
+.app-card.espectro .card-screenshot {
+  height: auto;
+  aspect-ratio: 2.32 / 1;
+}
+.app-card.presu .card-screenshot img,
+.app-card.espectro .card-screenshot img {
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
 .card-body {
   padding: 1.25rem 1.5rem 1.5rem;
 }
