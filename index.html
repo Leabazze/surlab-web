@@ -85,6 +85,81 @@ nav {
 }
 .lang-btn.active { background: var(--text); color: var(--bg); }
 
+/* HAMBURGER + MOBILE MENU */
+.nav-burger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  z-index: 110;
+  position: relative;
+}
+.nav-burger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text);
+  border-radius: 1px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.nav-burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-burger.open span:nth-child(2) { opacity: 0; }
+.nav-burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  background: rgba(8,8,8,0.97);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 95;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.mobile-menu.open { opacity: 1; visibility: visible; }
+.mobile-menu-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+.mobile-menu-links a {
+  color: var(--text);
+  text-decoration: none;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+  letter-spacing: -0.02em;
+  transition: color 0.2s, transform 0.2s;
+  display: inline-block;
+}
+.mobile-menu-links a:active { color: var(--accent); transform: scale(0.97); }
+.mobile-menu-tag {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: var(--dim);
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+}
+body.menu-open { overflow: hidden; }
+
 /* HERO SPLIT */
 .hero {
   min-height: 100vh;
@@ -834,6 +909,8 @@ footer p { color: var(--dim); font-size: 0.78rem; }
   .hero-left h1 { font-size: clamp(2.4rem, 9vw, 3.5rem); }
   nav { padding: 1rem 1.5rem; }
   .nav-links { display: none; }
+  .nav-burger { display: flex; }
+  .nav-right { gap: 0.85rem; }
   section { padding: 5rem 1.5rem; }
   .apps-grid { grid-template-columns: 1fr; }
   .sobre-wrap { grid-template-columns: 1fr; gap: 3rem; }
@@ -865,8 +942,21 @@ footer p { color: var(--dim); font-size: 0.78rem; }
       <button class="lang-btn active" data-lang="es" onclick="setLang('es')">ES</button>
       <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
     </div>
+    <button class="nav-burger" id="navBurger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-hidden="true">
+  <ul class="mobile-menu-links">
+    <li><a href="#servicios" data-i18n="nav.services">Servicios</a></li>
+    <li><a href="#apps" data-i18n="nav.products">Productos</a></li>
+    <li><a href="#sobre" data-i18n="nav.about">Nosotros</a></li>
+    <li><a href="#contacto" data-i18n="nav.contact">Contacto</a></li>
+  </ul>
+  <div class="mobile-menu-tag" data-i18n="hero.tag">Hecho en La Plata, Argentina 🧉</div>
+</div>
 
 <section class="hero">
   <div class="hero-left">
@@ -1860,6 +1950,41 @@ document.getElementById('botSubmit').addEventListener('click', async () => {
     }
   }
 });
+
+// ── Mobile menu (hamburger) ─────────────────────────
+(function(){
+  const burger = document.getElementById('navBurger');
+  const menu   = document.getElementById('mobileMenu');
+  if(!burger || !menu) return;
+
+  function setOpen(open){
+    burger.classList.toggle('open', open);
+    menu.classList.toggle('open', open);
+    document.body.classList.toggle('menu-open', open);
+    burger.setAttribute('aria-expanded', String(open));
+    menu.setAttribute('aria-hidden', String(!open));
+    burger.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+  }
+
+  burger.addEventListener('click', () => {
+    setOpen(!burger.classList.contains('open'));
+  });
+
+  // Cerrar al tocar un link
+  menu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => setOpen(false));
+  });
+
+  // Cerrar con Escape
+  document.addEventListener('keydown', e => {
+    if(e.key === 'Escape' && burger.classList.contains('open')) setOpen(false);
+  });
+
+  // Cerrar al cambiar a desktop
+  window.addEventListener('resize', () => {
+    if(window.innerWidth > 860 && burger.classList.contains('open')) setOpen(false);
+  });
+})();
 </script>
 
 </body>
