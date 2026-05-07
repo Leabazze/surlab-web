@@ -884,9 +884,12 @@ footer p { color: var(--dim); font-size: 0.78rem; }
 .app-card-big:hover .card-screenshot img {
   transform: scale(1.03);
 }
-/* PresuArg y Espectro: screenshots panorámicos, dejamos que la altura siga al ratio real
-   en vez de forzar 280px y recortar los costados. */
-.app-card.presu .card-screenshot,
+/* PresuArg: screenshot recapturada a ratio 1.37:1 (más cuadrado, casi portrait).
+   Espectro queda en 2.32 hasta tener la imagen actualizada. */
+.app-card.presu .card-screenshot {
+  height: auto;
+  aspect-ratio: 1.37 / 1;
+}
 .app-card.espectro .card-screenshot {
   height: auto;
   aspect-ratio: 2.32 / 1;
