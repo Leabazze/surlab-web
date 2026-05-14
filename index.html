@@ -1116,8 +1116,7 @@ footer p { color: var(--dim); font-size: 0.78rem; }
           <li data-i18n="srv.hosting.f4">Soporte por WhatsApp/email</li>
         </ul>
         <div class="service-price">
-          <div class="service-price-from" data-i18n="srv.from">Desde</div>
-          <div class="service-price-amount">$45.000<span>ARS / mes</span></div>
+          <div class="service-price-amount" data-i18n="srv.consult">Consultar</div>
         </div>
       </div>
 
@@ -1425,6 +1424,7 @@ const i18n = {
     "srv.hosting.desc":"Que tu web esté siempre online, rápida y segura. Nosotros nos encargamos de todo.",
     "srv.hosting.f1":"Hosting premium (Vercel/Firebase)","srv.hosting.f2":"Backups y monitoreo 24/7",
     "srv.hosting.f3":"Actualizaciones de contenido","srv.hosting.f4":"Soporte por WhatsApp/email",
+    "srv.consult":"Consultar",
     "srv.seo.desc":"Para que Google te encuentre y los clientes te elijan. Optimización real, no humo.",
     "srv.seo.f1":"Auditoría inicial completa","srv.seo.f2":"Optimización on-page",
     "srv.seo.f3":"Reporte mensual de posiciones","srv.seo.f4":"Mejora continua",
@@ -1509,6 +1509,7 @@ const i18n = {
     "srv.hosting.desc":"Keep your site online, fast and secure. We handle everything.",
     "srv.hosting.f1":"Premium hosting (Vercel/Firebase)","srv.hosting.f2":"Backups and 24/7 monitoring",
     "srv.hosting.f3":"Content updates","srv.hosting.f4":"WhatsApp/email support",
+    "srv.consult":"Inquire",
     "srv.seo.desc":"So Google finds you and clients pick you. Real optimization, not smoke.",
     "srv.seo.f1":"Complete initial audit","srv.seo.f2":"On-page optimization",
     "srv.seo.f3":"Monthly ranking reports","srv.seo.f4":"Continuous improvement",
@@ -1746,7 +1747,7 @@ const botFlow = {
     ]
   },
   faqGarantia: {
-    msg: '3 meses de garantía completa. 🛡️\n\nDurante los primeros 3 meses post-entrega:\n• Corregimos cualquier bug sin costo\n• Te respondemos por WhatsApp con prioridad\n• Mantenemos la web online y funcionando\n\nPasados los 3 meses, podés contratar hosting + mantenimiento mensual desde $45.000 ARS, o consultarnos puntualmente cuando necesites algo.',
+    msg: '3 meses de garantía completa. 🛡️\n\nDurante los primeros 3 meses post-entrega:\n• Corregimos cualquier bug sin costo\n• Te respondemos por WhatsApp con prioridad\n• Mantenemos la web online y funcionando\n\nPasados los 3 meses, podés contratar mantenimiento mensual (lo cotizamos según el proyecto), o consultarnos puntualmente cuando necesites algo.',
     options: [
       { text: '❓ Otra pregunta', next: 'faq' },
       { text: '💬 Quiero contactarlos', next: 'channelSelect', context: 'faq-general' },
@@ -1754,7 +1755,7 @@ const botFlow = {
     ]
   },
   faqHosting: {
-    msg: 'Depende del proyecto. 🏠\n\nCada caso lo cotizamos puntualmente. Algunos proyectos lo incluyen en el precio (sobre todo el Sistema Completo), otros van aparte ($45.000 ARS/mes para hosting premium en Vercel/Firebase).\n\nSi ya tenés hosting propio, también nos adaptamos y lo usamos. No te obligamos a cambiar nada.',
+    msg: 'Depende del proyecto. 🏠\n\n📄 **Landings**: hosting incluido sin cargo. Las dejamos en Vercel o Firebase y quedan funcionando sin mensualidad.\n\n🛒 **Proyectos más grandes** (tiendas, apps, sistemas con base de datos): el hosting se presupuesta según el caso (almacenamiento, tráfico esperado, recursos). Te lo dejamos claro en la propuesta antes de arrancar.\n\nSi ya tenés hosting propio, también nos adaptamos y lo usamos. No te obligamos a cambiar nada.',
     options: [
       { text: '❓ Otra pregunta', next: 'faq' },
       { text: '💬 Quiero contactarlos', next: 'channelSelect', context: 'faq-general' },
@@ -1762,7 +1763,7 @@ const botFlow = {
     ]
   },
   faqDemo: {
-    msg: 'Sí, para proyectos serios. 👀\n\nPara cotizaciones desde $1.500.000 ARS hacemos una charla previa de 30 min donde te mostramos:\n• Casos similares que armamos\n• El stack que usaríamos\n• Cómo te quedaría a vos\n\nPara proyectos más chicos, mandamos una propuesta detallada por escrito. Y tenés siempre acceso a nuestros productos propios (Simple Agenda, PresuArg, Espectro) que son demos reales en vivo, los podés ver ahora mismo.',
+    msg: 'Sí. 👀\n\nPasanos los detalles de lo que necesitás y te armamos un demo personalizado.\n\nMientras tanto, tenés acceso a nuestros productos propios (Simple Agenda, PresuArg, Espectro) que son demos reales en vivo, los podés ver ahora mismo.',
     options: [
       { text: '❓ Otra pregunta', next: 'faq' },
       { text: '💬 Quiero contactarlos', next: 'channelSelect', context: 'faq-general' },
@@ -1864,8 +1865,50 @@ function showChannelSelector() {
     setTimeout(() => showLeadForm(), 400);
   });
 
+  // Botón Volver al menú (discreto, abajo)
+  const backBtn = document.createElement('button');
+  backBtn.style.cssText = 'background: none; border: none; cursor: pointer; padding: 0.7rem; text-align: center; color: var(--muted); font-size: 0.85rem; margin-top: 0.3rem; width: 100%; transition: color 0.2s; font-family: inherit;';
+  backBtn.innerText = '🔙 Volver al menú';
+  backBtn.addEventListener('mouseenter', () => { backBtn.style.color = 'var(--text)'; });
+  backBtn.addEventListener('mouseleave', () => { backBtn.style.color = 'var(--muted)'; });
+  backBtn.addEventListener('click', () => {
+    addUserMsg('Volver al menú');
+    wrap.remove();
+    setTimeout(() => goToStep('start'), 400);
+  });
+
   wrap.appendChild(waBtn);
   wrap.appendChild(mailBtn);
+  wrap.appendChild(backBtn);
+  messagesEl.appendChild(wrap);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+}
+
+function addBackToMenuButton() {
+  // Limpiar cualquier botón "Volver al menú" anterior para evitar duplicados
+  document.querySelectorAll('.bot-back-to-menu').forEach(el => el.remove());
+
+  const wrap = document.createElement('div');
+  wrap.className = 'bot-back-to-menu';
+  wrap.style.cssText = 'display: flex; justify-content: center; padding: 0.5rem 0;';
+
+  const backBtn = document.createElement('button');
+  backBtn.style.cssText = 'background: none; border: none; cursor: pointer; padding: 0.7rem 1.2rem; text-align: center; color: var(--muted); font-size: 0.85rem; transition: color 0.2s; font-family: inherit;';
+  backBtn.innerText = '🔙 Volver al menú';
+  backBtn.addEventListener('mouseenter', () => { backBtn.style.color = 'var(--text)'; });
+  backBtn.addEventListener('mouseleave', () => { backBtn.style.color = 'var(--muted)'; });
+  backBtn.addEventListener('click', () => {
+    addUserMsg('Volver al menú');
+    wrap.remove();
+    // Cerrar inputArea y limpiar inputs
+    inputArea.style.display = 'none';
+    document.getElementById('botInputName').value = '';
+    document.getElementById('botInputPhone').value = '';
+    document.getElementById('botInputMessage').value = '';
+    setTimeout(() => goToStep('start'), 400);
+  });
+
+  wrap.appendChild(backBtn);
   messagesEl.appendChild(wrap);
   messagesEl.scrollTop = messagesEl.scrollHeight;
 }
@@ -1880,6 +1923,7 @@ function goToWhatsAppForm() {
       Continuar por WhatsApp
     `;
     document.getElementById('botSubmit').style.background = '#25D366';
+    addBackToMenuButton();
   }, 500);
 }
 
@@ -1894,6 +1938,7 @@ function showLeadForm() {
     `;
     document.getElementById('botSubmit').style.background = 'var(--accent)';
     document.getElementById('botSubmit').style.color = 'var(--bg)';
+    addBackToMenuButton();
   }, 500);
 }
 
@@ -1962,6 +2007,7 @@ document.getElementById('botSubmit').addEventListener('click', async () => {
     window.open(url, '_blank');
 
     inputArea.style.display = 'none';
+    document.querySelectorAll('.bot-back-to-menu').forEach(el => el.remove());
     addBotMsg(`¡Gracias ${name}! 🎉\n\nSe abrió WhatsApp con un mensaje listo para que nos lo mandes. Si no se abrió, podés escribirnos al +54 9 221 579-6854.\n\nTe respondemos en menos de 24hs.`);
   } else {
     // Modo Mail: enviar al backend
@@ -1971,6 +2017,7 @@ document.getElementById('botSubmit').addEventListener('click', async () => {
     }
 
     inputArea.style.display = 'none';
+    document.querySelectorAll('.bot-back-to-menu').forEach(el => el.remove());
 
     // Mostrar loader
     const loader = document.createElement('div');
