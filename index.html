@@ -976,7 +976,7 @@ footer p { color: var(--dim); font-size: 0.78rem; }
 
 <section class="hero">
   <div class="hero-left">
-    <h1 data-i18n-html="hero.h1">Construimos<br>para que <em>crezcas.</em></h1>
+    <h1 data-i18n-html="hero.h1">Construimos <br>para que <em>crezcas.</em></h1>
     <div class="hero-line"></div>
   </div>
   <div class="hero-right">
@@ -986,14 +986,6 @@ footer p { color: var(--dim); font-size: 0.78rem; }
       <a href="#contacto" class="btn-ghost" data-i18n="hero.cta2">Pedir presupuesto</a>
     </div>
     <div class="hero-counter">
-      <div>
-        <div class="hero-stat-num">3+</div>
-        <div class="hero-stat-label" data-i18n="stat.projects">Proyectos en producción</div>
-      </div>
-      <div>
-        <div class="hero-stat-num">4</div>
-        <div class="hero-stat-label" data-i18n="stat.products">Productos propios</div>
-      </div>
       <div>
         <div class="hero-stat-num">∞</div>
         <div class="hero-stat-label" data-i18n="stat.code">Líneas de código</div>
@@ -1366,8 +1358,6 @@ footer p { color: var(--dim); font-size: 0.78rem; }
         </div>
       </div>
       <div class="sobre-stats fade-up">
-        <div class="stat-box"><div class="stat-num">3+</div><div class="stat-label" data-i18n="stat.projects">Proyectos en producción</div></div>
-        <div class="stat-box"><div class="stat-num">4</div><div class="stat-label" data-i18n="stat.products">Productos propios</div></div>
         <div class="stat-box"><div class="stat-num">∞</div><div class="stat-label" data-i18n="stat.code">Líneas de código</div></div>
         <div class="stat-box"><div class="stat-num">1</div><div class="stat-label" data-i18n="stat.studio">Estudio, todo el foco</div></div>
       </div>
@@ -1398,7 +1388,7 @@ const i18n = {
   es: {
     "nav.services":"Servicios","nav.products":"Productos","nav.about":"Nosotros","nav.contact":"Contacto",
     "hero.tag":"Hecho en La Plata, Argentina 🧉",
-    "hero.h1":"Construimos<br>para que <em>crezcas.</em>",
+    "hero.h1":"Construimos <br>para que <em>crezcas.</em>",
     "hero.sub":"Webs, apps y sistemas de captación con código propio. Tecnología que se nota desde el primer día. Para comercios, profesionales y PyMEs argentinas.",
     "hero.cta1":"Ver servicios →","hero.cta2":"Pedir presupuesto",
 
@@ -1474,7 +1464,6 @@ const i18n = {
     "sobre.p1":"Somos un estudio chico con foco en lo que hacemos. Cada proyecto que tomamos lo hacemos como si fuera nuestro.",
     "sobre.p2":"No usamos plantillas, no tercerizamos código, no improvisamos. Lo que entregamos funciona, se mantiene, y se nota la diferencia.",
     "sobre.p3":"Operamos desde <strong>La Plata, Argentina</strong>, con stack moderno: Firebase, Vercel, Next.js, Android.",
-    "stat.projects":"Proyectos en producción","stat.products":"Productos propios","stat.apps":"Apps en Play Store",
     "stat.code":"Líneas de código","stat.studio":"Estudio, todo el foco",
 
     "contact.title":"¿Hablamos?","contact.desc":"Tenés un proyecto, una idea, o querés saber cuánto te saldría. Escribinos, respondemos rápido.",
@@ -1483,7 +1472,7 @@ const i18n = {
   en: {
     "nav.services":"Services","nav.products":"Products","nav.about":"About","nav.contact":"Contact",
     "hero.tag":"Made in La Plata, Argentina 🧉",
-    "hero.h1":"We build<br>so you <em>grow.</em>",
+    "hero.h1":"We build <br>so you <em>grow.</em>",
     "hero.sub":"Websites, apps and lead-capture systems with custom code. Technology that shows from day one. For Argentine businesses, professionals and SMEs.",
     "hero.cta1":"See services →","hero.cta2":"Get a quote",
 
@@ -1559,7 +1548,6 @@ const i18n = {
     "sobre.p1":"We're a small studio focused on what we do. Every project we take on, we treat as our own.",
     "sobre.p2":"We don't use templates, we don't outsource code, we don't improvise. What we deliver works, lasts, and the difference shows.",
     "sobre.p3":"Based in <strong>La Plata, Argentina</strong>, with a modern stack: Firebase, Vercel, Next.js, Android.",
-    "stat.projects":"Projects in production","stat.products":"Own products","stat.apps":"Apps on Play Store",
     "stat.code":"Lines of code","stat.studio":"One studio, full focus",
 
     "contact.title":"Let's talk","contact.desc":"You have a project, an idea, or want to know how much it would cost. Write to us, we reply fast.",
@@ -1682,6 +1670,7 @@ const botFlow = {
       { text: '🌐 Quiero una web nueva', next: 'tipoWeb' },
       { text: '💰 Ver precios', next: 'precios' },
       { text: '🤖 Bot + WhatsApp para mi negocio', next: 'sistemaCaptacion' },
+      { text: '❓ Preguntas frecuentes', next: 'faq' },
       { text: '💬 Hablar con SurLab', next: 'contacto' }
     ]
   },
@@ -1726,6 +1715,57 @@ const botFlow = {
     msg: 'Tremendo, es nuestro servicio estrella. 🎯\n\nLo que ves acá (este bot + el botón de WhatsApp) lo armamos integrado a tu web. Funciona 24/7, captura leads, los califica y te los pasa por WhatsApp.\n\nSistema completo (Web + Bot + WhatsApp + Hosting + SEO): desde $2.500.000 ARS + $80.000/mes.\n\n¿Te interesa que te contactemos?',
     options: [
       { text: '✅ Sí, quiero esto para mi negocio', next: 'channelSelect', context: 'sistema' },
+      { text: '🔙 Volver al menú', next: 'start' }
+    ]
+  },
+  faq: {
+    msg: '¿Qué te interesa saber? Te respondo al toque. 👇',
+    options: [
+      { text: '💸 ¿Me cobran extras durante el proyecto?', next: 'faqExtras' },
+      { text: '💳 ¿Cómo se paga?', next: 'faqPago' },
+      { text: '🛡️ ¿Qué garantía dan?', next: 'faqGarantia' },
+      { text: '🏠 ¿Incluye hosting?', next: 'faqHosting' },
+      { text: '👀 ¿Puedo ver un demo antes?', next: 'faqDemo' },
+      { text: '🔙 Volver al menú', next: 'start' }
+    ]
+  },
+  faqExtras: {
+    msg: 'No. ✅\n\nTodo lo que cotizamos está cerrado por escrito desde la propuesta inicial. No hay extras sorpresivos durante el proyecto: si el alcance original incluye algo, lo entregamos sin recargos.\n\nSi durante el proyecto querés agregar funcionalidades nuevas, te las cotizamos aparte y las aprobás antes de hacerlas. Vos sabés siempre exactamente cuánto vas a pagar.',
+    options: [
+      { text: '❓ Otra pregunta', next: 'faq' },
+      { text: '💬 Quiero contactarlos', next: 'channelSelect', context: 'faq-general' },
+      { text: '🔙 Volver al menú', next: 'start' }
+    ]
+  },
+  faqPago: {
+    msg: 'Bien simple. 💳\n\nAceptamos:\n• Transferencia bancaria\n• MercadoPago (también en cuotas con tarjeta si te conviene)\n\nEsquema: 50% al arrancar el proyecto + 50% al entregar. Sin pagos mensuales encubiertos, sin sorpresas.\n\nProyectos grandes los podemos partir en 3 hitos si necesitás financiar el cashflow.',
+    options: [
+      { text: '❓ Otra pregunta', next: 'faq' },
+      { text: '💬 Quiero contactarlos', next: 'channelSelect', context: 'faq-general' },
+      { text: '🔙 Volver al menú', next: 'start' }
+    ]
+  },
+  faqGarantia: {
+    msg: '3 meses de garantía completa. 🛡️\n\nDurante los primeros 3 meses post-entrega:\n• Corregimos cualquier bug sin costo\n• Te respondemos por WhatsApp con prioridad\n• Mantenemos la web online y funcionando\n\nPasados los 3 meses, podés contratar hosting + mantenimiento mensual desde $45.000 ARS, o consultarnos puntualmente cuando necesites algo.',
+    options: [
+      { text: '❓ Otra pregunta', next: 'faq' },
+      { text: '💬 Quiero contactarlos', next: 'channelSelect', context: 'faq-general' },
+      { text: '🔙 Volver al menú', next: 'start' }
+    ]
+  },
+  faqHosting: {
+    msg: 'Depende del proyecto. 🏠\n\nCada caso lo cotizamos puntualmente. Algunos proyectos lo incluyen en el precio (sobre todo el Sistema Completo), otros van aparte ($45.000 ARS/mes para hosting premium en Vercel/Firebase).\n\nSi ya tenés hosting propio, también nos adaptamos y lo usamos. No te obligamos a cambiar nada.',
+    options: [
+      { text: '❓ Otra pregunta', next: 'faq' },
+      { text: '💬 Quiero contactarlos', next: 'channelSelect', context: 'faq-general' },
+      { text: '🔙 Volver al menú', next: 'start' }
+    ]
+  },
+  faqDemo: {
+    msg: 'Sí, para proyectos serios. 👀\n\nPara cotizaciones desde $1.500.000 ARS hacemos una charla previa de 30 min donde te mostramos:\n• Casos similares que armamos\n• El stack que usaríamos\n• Cómo te quedaría a vos\n\nPara proyectos más chicos, mandamos una propuesta detallada por escrito. Y tenés siempre acceso a nuestros productos propios (Simple Agenda, PresuArg, Espectro) que son demos reales en vivo, los podés ver ahora mismo.',
+    options: [
+      { text: '❓ Otra pregunta', next: 'faq' },
+      { text: '💬 Quiero contactarlos', next: 'channelSelect', context: 'faq-general' },
       { text: '🔙 Volver al menú', next: 'start' }
     ]
   },
@@ -1904,6 +1944,7 @@ document.getElementById('botSubmit').addEventListener('click', async () => {
     'tienda': 'una tienda online',
     'sistema': 'el sistema completo de captación (Web + Bot + WhatsApp)',
     'cotizacion': 'recibir una cotización personalizada',
+    'faq-general': 'aclarar algunas dudas que vi en sus preguntas frecuentes',
     'contacto-general': 'consultar sobre sus servicios',
     'general': 'sus servicios'
   };
