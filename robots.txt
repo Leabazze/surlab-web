@@ -1,0 +1,20 @@
+# robots.txt — surlab.io
+# Permite a todos los crawlers indexar el sitio
+# Bloquea solo el endpoint de la API
+
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# Bloquear bots de scraping/IA agresivos (opcional, ajustá según tu criterio)
+User-agent: GPTBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Disallow: /
+
+# Sitemap
+Sitemap: https://surlab.io/sitemap.xml
