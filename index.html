@@ -3,6 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="author" content="SurLab">
+<meta name="geo.region" content="AR-B">
+<meta name="geo.placename" content="La Plata, Buenos Aires, Argentina">
 <title>SurLab — Software que resuelve algo</title>
 <meta name="description" content="SurLab es un estudio independiente de productos digitales. Hacemos apps que la gente realmente usa.">
 <meta name="theme-color" content="#080808">
@@ -15,10 +19,22 @@
 <meta property="og:url" content="https://surlab.io">
 <meta property="og:locale" content="es_AR">
 <meta property="og:locale:alternate" content="en_US">
+<meta property="og:site_name" content="SurLab">
+<meta property="og:image" content="https://surlab.io/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="SurLab — Construimos para que crezcas">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@surlab">
 <meta name="twitter:title" content="SurLab — Software que resuelve algo">
 <meta name="twitter:description" content="Estudio independiente de productos digitales. Apps simples, hechas en La Plata, Argentina.">
+<meta name="twitter:image" content="https://surlab.io/og.png">
+<meta name="twitter:image:alt" content="SurLab — Construimos para que crezcas">
 <link rel="canonical" href="https://surlab.io">
+<link rel="alternate" hreflang="es-AR" href="https://surlab.io">
+<link rel="alternate" hreflang="es" href="https://surlab.io">
+<link rel="alternate" hreflang="en" href="https://surlab.io/?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://surlab.io">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;800;900&family=Syne:wght@700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
@@ -1149,6 +1165,116 @@ footer p { color: var(--dim); font-size: 0.78rem; }
   .sobre-stats { grid-template-columns: 1fr; }
 }
 </style>
+
+<!-- Structured Data (JSON-LD) — Schema.org -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["Organization", "ProfessionalService", "LocalBusiness"],
+      "@id": "https://surlab.io/#organization",
+      "name": "SurLab",
+      "alternateName": "SurLab Studio",
+      "url": "https://surlab.io",
+      "logo": "https://surlab.io/og.png",
+      "image": "https://surlab.io/og.png",
+      "description": "Estudio independiente de productos digitales en La Plata, Argentina. Desarrollamos webs, apps y sistemas de captación de leads con código propio.",
+      "slogan": "Construimos para que crezcas",
+      "foundingDate": "2024",
+      "founder": { "@type": "Person", "name": "Leandro Bazze" },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "La Plata",
+        "addressRegion": "Buenos Aires",
+        "addressCountry": "AR"
+      },
+      "areaServed": [
+        { "@type": "Country", "name": "Argentina" },
+        { "@type": "Place", "name": "Latinoamérica" }
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+54-9-221-579-6854",
+        "contactType": "customer service",
+        "email": "surlab.tec@gmail.com",
+        "availableLanguage": ["Spanish", "English"]
+      },
+      "sameAs": [
+        "https://wa.me/5492215796854"
+      ],
+      "priceRange": "$$",
+      "paymentAccepted": ["Cash", "Credit Card", "Bank Transfer", "MercadoPago"],
+      "currenciesAccepted": "ARS, USD",
+      "knowsAbout": [
+        "Desarrollo Web",
+        "Aplicaciones Web",
+        "E-commerce",
+        "Tiendas Online",
+        "Sistemas de Captación",
+        "Landing Pages",
+        "Bots con IA",
+        "Identidad de Marca",
+        "SEO"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://surlab.io/#website",
+      "url": "https://surlab.io",
+      "name": "SurLab",
+      "publisher": { "@id": "https://surlab.io/#organization" },
+      "inLanguage": ["es-AR", "en"]
+    },
+    {
+      "@type": "OfferCatalog",
+      "name": "Servicios de SurLab",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "name": "Sitio Web Institucional",
+          "description": "5-8 secciones, panel admin, SEO técnico. Entrega: 15-30 días.",
+          "price": "500000",
+          "priceCurrency": "ARS",
+          "availability": "https://schema.org/InStock"
+        },
+        {
+          "@type": "Offer",
+          "name": "Landing Avanzada / Sistema de Captación",
+          "description": "Bot + WhatsApp + diseño exclusivo. Entrega: 7-15 días.",
+          "price": "1200000",
+          "priceCurrency": "ARS",
+          "availability": "https://schema.org/InStock"
+        },
+        {
+          "@type": "Offer",
+          "name": "Tienda Online (E-commerce)",
+          "description": "Catálogo, MercadoPago, stock, pedidos. Sin comisiones recurrentes. Entrega: 30-45 días.",
+          "price": "2300000",
+          "priceCurrency": "ARS",
+          "availability": "https://schema.org/InStock"
+        },
+        {
+          "@type": "Offer",
+          "name": "Aplicación a Medida",
+          "description": "Web app, dashboard, sistemas de gestión. Entrega: 45-90 días.",
+          "price": "3500000",
+          "priceCurrency": "ARS",
+          "availability": "https://schema.org/InStock"
+        },
+        {
+          "@type": "Offer",
+          "name": "Identidad de Marca / Branding",
+          "description": "Logo, paleta, manual de marca.",
+          "price": "400000",
+          "priceCurrency": "ARS",
+          "availability": "https://schema.org/InStock"
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
