@@ -685,6 +685,64 @@ a.app-card:hover { transform: translateY(-3px); }
   background: var(--accent-dim); border-color: var(--accent); color: var(--accent);
 }
 
+.bot-contact-form {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 14px; padding: 0.85rem;
+  margin: 0.3rem 0; display: flex; flex-direction: column; gap: 0.55rem;
+  animation: slide-up 0.3s ease-out;
+}
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.bot-contact-form-title {
+  display: flex; align-items: center; gap: 0.4rem;
+  font-family: 'Syne', sans-serif; font-weight: 800;
+  font-size: 0.88rem; color: var(--accent);
+  margin-bottom: 0.15rem;
+}
+.bot-contact-form-title svg { width: 16px; height: 16px; }
+.bot-contact-form input,
+.bot-contact-form textarea {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 0.55rem 0.75rem;
+  color: var(--text); font-family: inherit; font-size: 0.85rem;
+}
+.bot-contact-form input:focus,
+.bot-contact-form textarea:focus {
+  outline: none; border-color: var(--accent);
+}
+.bot-contact-form textarea { resize: none; min-height: 60px; line-height: 1.4; }
+.bot-contact-form-actions { display: flex; gap: 0.4rem; margin-top: 0.15rem; }
+.bot-contact-form-submit {
+  flex: 1; background: var(--accent); color: var(--bg);
+  border: none; border-radius: 10px; padding: 0.6rem 0.9rem;
+  font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.82rem;
+  letter-spacing: 0.02em; cursor: pointer;
+  transition: transform 0.15s, opacity 0.15s;
+}
+.bot-contact-form-submit:hover:not(:disabled) { transform: scale(1.02); }
+.bot-contact-form-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+.bot-contact-form-cancel {
+  background: transparent; color: var(--muted);
+  border: 1px solid var(--border); border-radius: 10px;
+  padding: 0.6rem 0.9rem; font-family: inherit; font-size: 0.82rem;
+  cursor: pointer;
+}
+.bot-contact-form-cancel:hover { color: var(--text); border-color: var(--muted); }
+.bot-contact-success {
+  background: rgba(240,192,96,0.1);
+  border: 1px solid var(--accent);
+  border-radius: 10px; padding: 0.7rem 0.85rem;
+  color: var(--text); font-size: 0.85rem; line-height: 1.5;
+}
+.bot-contact-error {
+  background: rgba(255,80,80,0.1);
+  border: 1px solid #d94545;
+  border-radius: 10px; padding: 0.6rem 0.85rem;
+  color: #ffaaaa; font-size: 0.82rem;
+}
+
 .typing-dots { display: inline-flex; gap: 4px; padding: 3px 0; }
 .typing-dots span {
   width: 6px; height: 6px; border-radius: 50%;
@@ -2273,7 +2331,23 @@ ESTILO DE RESPUESTA
 - 1-2 emojis con moderación si calza, no más.
 - Si el visitante quiere algo concreto (cotizar, contratar, ver demo), recomendá WhatsApp.
 - Si te preguntan "cómo funcionás" o "qué te diferencia del otro bot": explicá que sos IA real (Claude de Anthropic) — no script con respuestas predefinidas. Entendés lenguaje natural, recordás el contexto y razonás. Es el tipo de bot que SurLab construye para clientes.
-- No inventes precios, plazos, ni servicios fuera de los listados arriba.`;
+- No inventes precios, plazos, ni servicios fuera de los listados arriba.
+
+🎯 CUÁNDO MOSTRAR EL FORMULARIO DE CONTACTO
+Disponés de una capacidad especial: si el visitante muestra intención real de contactar a SurLab (cotizar algo, contratar, agendar reunión, "quiero que me llamen", "cómo arrancamos", etc.), terminá tu respuesta con la etiqueta exacta:
+[SHOW_CONTACT_FORM]
+Esto va a mostrarle un formulario adentro del chat para que deje sus datos sin salir de la conversación. NO menciones esta etiqueta ni la expliques: solo escribila al final del mensaje cuando corresponda. El visitante verá el form, no la etiqueta.
+Ejemplos donde SÍ debés terminar con [SHOW_CONTACT_FORM]:
+- "Me interesa la tienda online, ¿cómo seguimos?"
+- "¿Pueden cotizarme algo a medida?"
+- "Quiero charlar con alguien"
+- "¿Cuándo podrían empezar?"
+- "Mandame info por favor"
+Ejemplos donde NO la uses (son consultas informativas, no intención):
+- "¿Cuánto sale X?" (primera vez, sin contexto de compra)
+- "¿Qué tecnologías usan?"
+- "¿Cómo funcionás?"
+Si dudás, mejor NO la mostrés; el visitante puede pedirla escribiendo "quiero contactar".`;
 
 const AI_QUICK_START = [
   '¿Qué hace SurLab?',
@@ -2325,6 +2399,111 @@ function aiShowQuickChips() {
   aiMessagesEl.scrollTop = aiMessagesEl.scrollHeight;
 }
 
+function aiShowContactForm() {
+  // Avoid duplicates
+  if (document.getElementById('aiContactForm')) return;
+
+  const form = document.createElement('div');
+  form.className = 'bot-contact-form';
+  form.id = 'aiContactForm';
+  form.innerHTML = \`
+    <div class="bot-contact-form-title">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+        <polyline points="22,6 12,13 2,6"/>
+      </svg>
+      Dejá tus datos y te contactamos
+    </div>
+    <input type="text" id="acfName" placeholder="Tu nombre" autocomplete="name" required>
+    <input type="tel" id="acfPhone" placeholder="WhatsApp (ej: 221 579-6854)" autocomplete="tel" required>
+    <textarea id="acfMessage" placeholder="¿Sobre qué querés que te contactemos? (opcional)" rows="2"></textarea>
+    <div class="bot-contact-form-actions">
+      <button class="bot-contact-form-cancel" id="acfCancel">Después</button>
+      <button class="bot-contact-form-submit" id="acfSubmit">Enviar a SurLab</button>
+    </div>
+  \`;
+  aiMessagesEl.appendChild(form);
+  aiMessagesEl.scrollTop = aiMessagesEl.scrollHeight;
+
+  const submitBtn = form.querySelector('#acfSubmit');
+  const cancelBtn = form.querySelector('#acfCancel');
+  const nameEl    = form.querySelector('#acfName');
+  const phoneEl   = form.querySelector('#acfPhone');
+  const msgEl     = form.querySelector('#acfMessage');
+
+  cancelBtn.onclick = () => {
+    form.remove();
+    aiAppendMsg('bot', 'Listo, seguimos charlando. Cuando quieras, escribime "quiero contactar" y volvemos a abrir el formulario.');
+  };
+
+  submitBtn.onclick = async () => {
+    const name  = nameEl.value.trim();
+    const phone = phoneEl.value.trim();
+    const msg   = msgEl.value.trim();
+
+    if (!name || !phone) {
+      nameEl.style.borderColor = name ? '' : '#d94545';
+      phoneEl.style.borderColor = phone ? '' : '#d94545';
+      return;
+    }
+    submitBtn.disabled = true;
+    submitBtn.innerText = 'Enviando...';
+
+    // Build context: full AI conversation summary
+    const convoSummary = aiConversation.map(m =>
+      (m.role === 'user' ? 'Visitante: ' : 'Bot IA: ') + m.content
+    ).join('\n\n');
+
+    try {
+      const r = await fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          phone,
+          message: msg || '(Sin comentario adicional. Ver historial de chat IA abajo)',
+          interest: 'Lead desde Bot IA',
+          context: 'bot-ia | historial: ' + convoSummary.slice(0, 1500),
+          source: 'surlab.io · Bot IA',
+          timestamp: new Date().toISOString()
+        })
+      });
+
+      if (!r.ok) throw new Error('lead API ' + r.status);
+
+      form.remove();
+      const success = document.createElement('div');
+      success.className = 'bot-contact-success';
+      success.innerHTML = '✅ <strong>¡Listo, ' + escapeText(name) + '!</strong><br>Te vamos a contactar al ' + escapeText(phone) + ' en menos de 24hs.';
+      aiMessagesEl.appendChild(success);
+      aiMessagesEl.scrollTop = aiMessagesEl.scrollHeight;
+
+      // Push synthetic message into history so AI knows the form was sent
+      aiConversation.push({
+        role: 'user',
+        content: '[El visitante ya completó el formulario de contacto. Sus datos llegaron a SurLab.]'
+      });
+
+    } catch (err) {
+      console.error('Lead submit error:', err);
+      const error = document.createElement('div');
+      error.className = 'bot-contact-error';
+      error.innerText = 'No pude enviar el mensaje. Probá escribiendo directamente al WhatsApp +54 9 221 579-6854.';
+      form.appendChild(error);
+      submitBtn.disabled = false;
+      submitBtn.innerText = 'Reintentar';
+    }
+  };
+
+  setTimeout(() => nameEl.focus(), 100);
+}
+
+function escapeText(s) {
+  const div = document.createElement('div');
+  div.innerText = s;
+  return div.innerHTML;
+}
+
 async function sendAIMessage(userText) {
   if (!userText.trim() || aiResponding) return;
   aiResponding = true;
@@ -2356,20 +2535,30 @@ async function sendAIMessage(userText) {
                   'No pude generar respuesta. ¿Probás de nuevo?';
 
     typingEl.remove();
+
+    // Check for contact form marker
+    const SHOW_FORM_TAG = '[SHOW_CONTACT_FORM]';
+    const shouldShowForm = reply.includes(SHOW_FORM_TAG);
+    const cleanReply = reply.replace(SHOW_FORM_TAG, '').trim();
+
     const botMsgEl = aiAppendMsg('bot', '');
     aiConversation.push({ role: 'assistant', content: reply });
 
-    // Typewriter animation
+    // Typewriter animation on the CLEANED reply
     let i = 0;
     const interval = setInterval(() => {
-      if (i < reply.length) {
-        botMsgEl.innerText = reply.slice(0, ++i);
+      if (i < cleanReply.length) {
+        botMsgEl.innerText = cleanReply.slice(0, ++i);
         aiMessagesEl.scrollTop = aiMessagesEl.scrollHeight;
       } else {
         clearInterval(interval);
         aiResponding = false;
         aiChatSend.disabled = false;
         aiChatInput.focus();
+        // After the bot finishes typing, show the form if requested
+        if (shouldShowForm) {
+          setTimeout(aiShowContactForm, 300);
+        }
       }
     }, 12);
 
