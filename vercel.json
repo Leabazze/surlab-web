@@ -1,7 +1,15 @@
 {
+  "outputDirectory": ".",
   "functions": {
+    "api/lead.js": {
+      "runtime": "nodejs20.x"
+    },
     "api/chat.js": {
+      "runtime": "nodejs20.x",
       "maxDuration": 30
     }
-  }
+  },
+  "rewrites": [
+    { "source": "/screenshots/:file", "destination": "/public/screenshots/:file" }
+  ]
 }
