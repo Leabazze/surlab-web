@@ -532,6 +532,22 @@ a.app-card:hover { transform: translateY(-3px); }
   transition: background 0.2s, border-color 0.2s;
 }
 .captacion-cta:hover { background: rgba(240,192,96,0.18); }
+.captacion-cta-ai {
+  margin-left: 0.75rem;
+  background: linear-gradient(135deg, var(--accent), #d09030);
+  color: var(--bg);
+  border: 1px solid var(--accent);
+  font-weight: 700;
+  box-shadow: 0 2px 14px rgba(240,192,96,0.35);
+}
+.captacion-cta-ai:hover {
+  background: linear-gradient(135deg, #f5d080, #d8a040);
+  box-shadow: 0 4px 20px rgba(240,192,96,0.55);
+  transform: translateY(-1px);
+}
+@media (max-width: 600px) {
+  .captacion-cta-ai { margin-left: 0; margin-top: 0.6rem; display: inline-block; }
+}
 .captacion-hint {
   margin-top: 1.5rem; font-size: 0.85rem; color: var(--muted);
   font-style: italic; opacity: 0.8;
@@ -1218,6 +1234,7 @@ footer p { color: var(--dim); font-size: 0.78rem; }
     </div>
 
     <a href="#" onclick="document.getElementById('botToggle').click(); return false;" class="captacion-cta" data-i18n="captacion.cta">💬 Probá nuestro bot ahora →</a>
+    <a href="#" onclick="document.getElementById('aiBotToggle').click(); return false;" class="captacion-cta captacion-cta-ai" data-i18n="captacion.cta_ai">✨ Probá nuestro bot IA →</a>
     <p class="captacion-hint fade-up" data-i18n="captacion.hint">Mirá abajo a la derecha. Lo que ves en nuestra web, lo armamos para vos.</p>
   </div>
 </section>
@@ -1598,7 +1615,7 @@ const i18n = {
     "captacion.f3.desc":"El bot pide nombre, rubro y necesidad antes de pasártelo. Solo te llegan los serios.",
     "captacion.f4.title":"Setup rápido",
     "captacion.f4.desc":"Lo activamos en tu web en 1 semana. Sin plataformas pagas, sin marca de terceros.",
-    "captacion.cta":"💬 Probá nuestro bot ahora →",
+    "captacion.cta":"💬 Probá nuestro bot ahora →","captacion.cta_ai":"✨ Probá nuestro bot IA →",
     "captacion.hint":"Mirá abajo a la derecha. Lo que ves en nuestra web, lo armamos para vos.",
     "srv.landing.desc":"Una página, todo lo importante. Para profesionales, lanzamientos o productos.",
     "srv.landing.f1":"Diseño exclusivo, no plantilla","srv.landing.f2":"Optimizada para Google y mobile",
@@ -1683,7 +1700,7 @@ const i18n = {
     "captacion.f3.desc":"The bot asks for name, industry and needs before sending them. Only serious leads get through.",
     "captacion.f4.title":"Quick setup",
     "captacion.f4.desc":"Live on your site in 1 week. No paid platforms, no third-party branding.",
-    "captacion.cta":"💬 Try our bot now →",
+    "captacion.cta":"💬 Try our bot now →","captacion.cta_ai":"✨ Try our AI bot →",
     "captacion.hint":"Look at the bottom right. What you see on our site, we build for you.",
     "srv.landing.desc":"One page, everything that matters. For professionals, launches or products.",
     "srv.landing.f1":"Custom design, never a template","srv.landing.f2":"Optimized for Google and mobile",
