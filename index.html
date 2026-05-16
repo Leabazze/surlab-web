@@ -567,10 +567,141 @@ a.app-card:hover { transform: translateY(-3px); }
   100% { transform: scale(1.6); opacity: 0; }
 }
 
+/* === FLOATING BUTTON BADGES === */
+.bot-toggle, .bot-ai-toggle { position: fixed; }
+.bot-badge {
+  position: absolute; top: -11px;
+  left: 50%; transform: translateX(-50%);
+  font-family: 'Syne', sans-serif; font-weight: 800;
+  font-size: 9px; letter-spacing: 0.08em;
+  padding: 3px 8px; border-radius: 10px;
+  pointer-events: none; white-space: nowrap;
+}
+.bot-badge-classic {
+  background: var(--bg); color: var(--muted);
+  border: 1px solid var(--border);
+}
+.bot-badge-ai {
+  background: var(--accent); color: var(--bg);
+  box-shadow: 0 2px 8px rgba(240,192,96,0.5);
+}
+
+/* === BOT IA (AI version) === */
+.bot-ai-toggle {
+  bottom: 24px; right: 184px;
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), #d09030);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 22px rgba(240,192,96,0.55);
+  cursor: pointer; z-index: 9998;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: none; color: var(--bg);
+}
+.bot-ai-toggle:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(240,192,96,0.7); }
+.bot-ai-toggle svg { width: 26px; height: 26px; }
+.bot-ai-toggle .close-icon { display: none; }
+.bot-ai-toggle.active .ai-icon { display: none; }
+.bot-ai-toggle.active .close-icon { display: block; }
+
+/* Pulsing sparkle effect on AI button */
+.bot-ai-pulse {
+  position: absolute; inset: 0; border-radius: 50%;
+  background: var(--accent);
+  animation: ai-pulse 2.5s ease-out infinite;
+  z-index: -1;
+}
+@keyframes ai-pulse {
+  0% { transform: scale(1); opacity: 0.55; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
+
+/* AI window — reuses .bot-window styling but separate instance */
+.bot-ai-window {
+  position: fixed;
+  bottom: 92px; right: 24px;
+  width: 380px; max-width: calc(100vw - 48px);
+  height: 540px; max-height: calc(100vh - 130px);
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: 0 12px 50px rgba(0,0,0,0.5);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  z-index: 9999;
+  transform: translateY(20px) scale(0.95);
+  opacity: 0; pointer-events: none;
+  transition: transform 0.25s, opacity 0.25s;
+}
+.bot-ai-window.open {
+  transform: translateY(0) scale(1);
+  opacity: 1; pointer-events: all;
+}
+.bot-ai-avatar {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), #d09030);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--bg); flex-shrink: 0;
+}
+.bot-ai-avatar svg { width: 20px; height: 20px; }
+
+/* AI chat input row */
+.bot-input-row {
+  padding: 0.7rem 0.75rem; border-top: 1px solid var(--border);
+  background: var(--bg3);
+  display: flex; gap: 0.5rem; align-items: flex-end;
+}
+.bot-input-row textarea {
+  flex: 1; padding: 0.6rem 0.85rem;
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 12px; color: var(--text);
+  font-family: inherit; font-size: 0.88rem;
+  resize: none; line-height: 1.4;
+  min-height: 38px; max-height: 120px; overflow-y: auto;
+}
+.bot-input-row textarea:focus { outline: none; border-color: var(--accent); }
+.bot-send-btn {
+  width: 38px; height: 38px; flex-shrink: 0;
+  background: var(--accent); color: var(--bg);
+  border: none; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: transform 0.15s, opacity 0.15s;
+}
+.bot-send-btn:hover:not(:disabled) { transform: scale(1.05); }
+.bot-send-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.bot-send-btn svg { width: 16px; height: 16px; }
+
+.bot-quick-chips {
+  display: flex; flex-wrap: wrap; gap: 0.4rem;
+  padding: 0.2rem 0.1rem 0.4rem;
+}
+.bot-quick-chip {
+  background: var(--bg3); border: 1px solid var(--border);
+  color: var(--text); padding: 0.45rem 0.75rem;
+  border-radius: 20px; font-family: inherit; font-size: 0.78rem;
+  cursor: pointer; transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.bot-quick-chip:hover {
+  background: var(--accent-dim); border-color: var(--accent); color: var(--accent);
+}
+
+.typing-dots { display: inline-flex; gap: 4px; padding: 3px 0; }
+.typing-dots span {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--muted); display: inline-block;
+  animation: typing-bounce 1.3s infinite ease-in-out;
+}
+.typing-dots span:nth-child(2) { animation-delay: 0.18s; }
+.typing-dots span:nth-child(3) { animation-delay: 0.36s; }
+@keyframes typing-bounce {
+  0%, 65%, 100% { transform: translateY(0); opacity: 0.4; }
+  35% { transform: translateY(-5px); opacity: 1; }
+}
+
 /* === BOT CHATBOT === */
 .bot-toggle {
   position: fixed;
-  bottom: 24px; right: 92px;
+  bottom: 24px; right: 104px;
   width: 56px; height: 56px;
   border-radius: 50%;
   background: var(--accent);
@@ -816,7 +947,9 @@ a.app-card:hover { transform: translateY(-3px); }
   .wa-float, .bot-toggle {
     width: 50px; height: 50px;
   }
-  .bot-toggle { right: 78px; bottom: 18px; }
+  .bot-toggle { right: 90px; bottom: 18px; }
+  .bot-ai-toggle { right: 162px; bottom: 18px; }
+  .bot-ai-window { width: calc(100vw - 32px); right: 16px; height: 70vh; }
   .wa-float { bottom: 18px; right: 18px; }
 }
 
@@ -1608,7 +1741,8 @@ document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
 </a>
 
 <!-- Bot Toggle Button -->
-<button id="botToggle" class="bot-toggle" aria-label="Abrir asistente">
+<button id="botToggle" class="bot-toggle" aria-label="Abrir bot común">
+  <span class="bot-badge bot-badge-classic">COMÚN</span>
   <svg class="chat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
   </svg>
@@ -1616,6 +1750,48 @@ document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
     <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
   </svg>
 </button>
+
+<!-- ─── BOT IA (Claude) ─── -->
+<button id="aiBotToggle" class="bot-ai-toggle" aria-label="Abrir bot con IA">
+  <span class="bot-badge bot-badge-ai">IA</span>
+  <span class="bot-ai-pulse"></span>
+  <svg class="ai-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 2 L13.5 8.5 L20 10 L13.5 11.5 L12 18 L10.5 11.5 L4 10 L10.5 8.5 Z"/>
+    <path d="M18 4 L18.6 5.6 L20 6 L18.6 6.4 L18 8 L17.4 6.4 L16 6 L17.4 5.6 Z" fill="currentColor"/>
+  </svg>
+  <svg class="close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+  </svg>
+</button>
+
+<!-- AI Bot Window -->
+<div id="aiBotWindow" class="bot-ai-window bot-window" role="dialog" aria-label="Asistente IA SurLab">
+  <div class="bot-header">
+    <div class="bot-ai-avatar">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 L13.5 8.5 L20 10 L13.5 11.5 L12 18 L10.5 11.5 L4 10 L10.5 8.5 Z"/></svg>
+    </div>
+    <div class="bot-header-text">
+      <strong>Asistente IA · SurLab</strong>
+      <span>Powered by Claude</span>
+    </div>
+    <button class="bot-close" id="aiBotClose" aria-label="Cerrar chat IA">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+  </div>
+  <div id="aiBotMessages" class="bot-messages"></div>
+  <div class="bot-input-row">
+    <textarea id="aiChatInput" placeholder="Escribí tu pregunta..." rows="1" autocomplete="off"></textarea>
+    <button id="aiChatSend" class="bot-send-btn" aria-label="Enviar mensaje">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="22" y1="2" x2="11" y2="13"/>
+        <polygon points="22 2 15 22 11 13 2 9 22 2" fill="currentColor"/>
+      </svg>
+    </button>
+  </div>
+  <div class="bot-disclaimer">IA real · Solo responde sobre SurLab</div>
+</div>
 
 <!-- Bot Window -->
 <div id="botWindow" class="bot-window" role="dialog" aria-label="Asistente SurLab">
@@ -2053,6 +2229,202 @@ document.getElementById('botSubmit').addEventListener('click', async () => {
       addBotMsg(`Tuvimos un problema enviando tus datos. 😕\n\nPodés escribirnos directamente por WhatsApp al +54 9 221 579-6854 o por mail a surlab.tec@gmail.com. ¡Disculpá!`);
     }
   }
+});
+
+
+
+// ═══════════════════════════════════════════════════════════════
+// BOT CON IA (Claude vía Anthropic API)
+// ═══════════════════════════════════════════════════════════════
+// El frontend NUNCA llama directo a Anthropic — siempre pasa por /api/chat
+// (api/chat.js, que vive server-side y tiene la API key en env var).
+const AI_API_URL = '/api/chat';  // ← proxy backend (api/chat.js)
+const AI_MODEL   = 'claude-haiku-4-5-20251001';
+
+const AI_SYSTEM_PROMPT = `Sos el asistente virtual con IA de SurLab, un estudio argentino de desarrollo web y software con base en La Plata. Estás corriendo en vivo en la web de SurLab como demo — el visitante está viendo en tiempo real lo que SurLab puede construir.
+
+🔒 REGLAS ESTRICTAS DE ALCANCE (NO NEGOCIABLES):
+- SOLO respondés preguntas sobre: SurLab, sus servicios, precios, procesos, plazos, formas de contacto, o cómo funcionás vos.
+- Si te preguntan sobre CUALQUIER OTRO TEMA (política, salud, recetas, deportes, otra empresa, programación específica, código, traducciones, resúmenes, chistes, juegos, tareas escolares, etc.), respondés AMABLEMENTE pero firme: "Soy el asistente de SurLab, solo puedo ayudarte con consultas sobre nuestros servicios. ¿Te puedo ayudar con algo de SurLab?"
+- NUNCA escribís código, ni hacés traducciones, ni resumís textos, ni das consejos médicos/legales/financieros.
+- Si el usuario insiste con un tema fuera de SurLab, mantenete firme con la misma respuesta sin enojarte.
+- Si te preguntan tu identidad: sos "el asistente IA de SurLab" (no menciones Claude/Anthropic salvo que pregunten "qué tecnología usás").
+
+CONTEXTO DE SURLAB
+- Ubicación: La Plata, Argentina. Servimos a toda Argentina y Latam.
+- Hacemos: webs, apps y sistemas de captación de leads con código propio (no plantillas).
+- Garantía: 3 meses post-entrega (corregimos cualquier bug sin costo).
+- Pago: 50% al iniciar + 50% al entregar. Transferencia, MercadoPago o dólares.
+- Contacto humano: WhatsApp +54 9 221 579-6854 o surlab.tec@gmail.com
+
+SERVICIOS Y PRECIOS (en pesos argentinos, "desde"):
+- Sitio web institucional: $500.000 (5-8 secciones, panel admin, SEO técnico, 15-30 días)
+- Landing avanzada / sistema de captación: $1.200.000 (bot + WhatsApp + diseño exclusivo, 7-15 días)
+- Tienda online (e-commerce): $2.300.000 (catálogo, MercadoPago, stock, pedidos, 30-45 días)
+- Aplicación a medida: $3.500.000 (web app, dashboard, gestión, 45-90 días)
+- Identidad / branding: $400.000 (logo, paleta, manual de marca)
+- SEO / marketing inicial: $600.000 + $30.000/mes
+- Paquete completo (web + bot + WhatsApp + hosting + SEO): $2.500.000 + $80.000/mes
+- Hosting + mantenimiento: $180.000/mes
+
+ESTILO DE RESPUESTA
+- Hablá en argentino: usá "vos", no "tú". Tono cercano, profesional, directo.
+- Respuestas cortas: 3-5 líneas idealmente, sin leyendas.
+- 1-2 emojis con moderación si calza, no más.
+- Si el visitante quiere algo concreto (cotizar, contratar, ver demo), recomendá WhatsApp.
+- Si te preguntan "cómo funcionás" o "qué te diferencia del otro bot": explicá que sos IA real (Claude de Anthropic) — no script con respuestas predefinidas. Entendés lenguaje natural, recordás el contexto y razonás. Es el tipo de bot que SurLab construye para clientes.
+- No inventes precios, plazos, ni servicios fuera de los listados arriba.`;
+
+const AI_QUICK_START = [
+  '¿Qué hace SurLab?',
+  '¿Cuánto sale una tienda online?',
+  '¿En qué te diferenciás del otro bot?',
+  '¿Cómo es el proceso?'
+];
+
+const aiConversation = [];
+let aiResponding = false;
+
+const aiMessagesEl = document.getElementById('aiBotMessages');
+const aiBotToggle  = document.getElementById('aiBotToggle');
+const aiBotWindow  = document.getElementById('aiBotWindow');
+const aiBotClose   = document.getElementById('aiBotClose');
+const aiChatInput  = document.getElementById('aiChatInput');
+const aiChatSend   = document.getElementById('aiChatSend');
+
+function aiAppendMsg(role, text) {
+  const div = document.createElement('div');
+  div.className = 'bot-msg ' + (role === 'user' ? 'user' : 'bot');
+  div.innerText = text;
+  aiMessagesEl.appendChild(div);
+  aiMessagesEl.scrollTop = aiMessagesEl.scrollHeight;
+  return div;
+}
+
+function aiShowTyping() {
+  const div = document.createElement('div');
+  div.className = 'bot-msg bot bot-typing';
+  div.innerHTML = '<span class="typing-dots"><span></span><span></span><span></span></span>';
+  aiMessagesEl.appendChild(div);
+  aiMessagesEl.scrollTop = aiMessagesEl.scrollHeight;
+  return div;
+}
+
+function aiShowQuickChips() {
+  const wrap = document.createElement('div');
+  wrap.className = 'bot-quick-chips';
+  wrap.id = 'aiQuickStart';
+  AI_QUICK_START.forEach(q => {
+    const chip = document.createElement('button');
+    chip.className = 'bot-quick-chip';
+    chip.innerText = q;
+    chip.onclick = () => { wrap.remove(); sendAIMessage(q); };
+    wrap.appendChild(chip);
+  });
+  aiMessagesEl.appendChild(wrap);
+  aiMessagesEl.scrollTop = aiMessagesEl.scrollHeight;
+}
+
+async function sendAIMessage(userText) {
+  if (!userText.trim() || aiResponding) return;
+  aiResponding = true;
+  aiChatSend.disabled = true;
+
+  const qs = document.getElementById('aiQuickStart');
+  if (qs) qs.remove();
+
+  aiAppendMsg('user', userText);
+  aiConversation.push({ role: 'user', content: userText });
+
+  const typingEl = aiShowTyping();
+
+  try {
+    const response = await fetch(AI_API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: AI_MODEL,
+        max_tokens: 600,
+        system: AI_SYSTEM_PROMPT,
+        messages: aiConversation
+      })
+    });
+
+    if (!response.ok) throw new Error('API ' + response.status);
+    const data = await response.json();
+    const reply = (data.content && data.content[0] && data.content[0].text) ||
+                  'No pude generar respuesta. ¿Probás de nuevo?';
+
+    typingEl.remove();
+    const botMsgEl = aiAppendMsg('bot', '');
+    aiConversation.push({ role: 'assistant', content: reply });
+
+    // Typewriter animation
+    let i = 0;
+    const interval = setInterval(() => {
+      if (i < reply.length) {
+        botMsgEl.innerText = reply.slice(0, ++i);
+        aiMessagesEl.scrollTop = aiMessagesEl.scrollHeight;
+      } else {
+        clearInterval(interval);
+        aiResponding = false;
+        aiChatSend.disabled = false;
+        aiChatInput.focus();
+      }
+    }, 12);
+
+  } catch (err) {
+    console.error('AI error:', err);
+    typingEl.remove();
+    aiAppendMsg('bot', 'Ups, tuve un problema técnico. 😕\n\nProbá de nuevo o escribinos por WhatsApp al +54 9 221 579-6854.');
+    aiResponding = false;
+    aiChatSend.disabled = false;
+  }
+}
+
+// Auto-resize textarea
+aiChatInput.addEventListener('input', () => {
+  aiChatInput.style.height = 'auto';
+  aiChatInput.style.height = Math.min(aiChatInput.scrollHeight, 120) + 'px';
+});
+
+// Send on Enter
+aiChatInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    const text = aiChatInput.value.trim();
+    if (text && !aiResponding) {
+      aiChatInput.value = '';
+      aiChatInput.style.height = 'auto';
+      sendAIMessage(text);
+    }
+  }
+});
+
+aiChatSend.addEventListener('click', () => {
+  const text = aiChatInput.value.trim();
+  if (text && !aiResponding) {
+    aiChatInput.value = '';
+    aiChatInput.style.height = 'auto';
+    sendAIMessage(text);
+  }
+});
+
+aiBotToggle.addEventListener('click', () => {
+  const isOpen = aiBotWindow.classList.toggle('open');
+  aiBotToggle.classList.toggle('active', isOpen);
+  if (isOpen && aiConversation.length === 0) {
+    setTimeout(() => {
+      aiAppendMsg('bot', '¡Hola! 👋 Soy el asistente con IA de SurLab.\n\nA diferencia del bot común, te entiendo de verdad — preguntame lo que quieras sobre nuestros servicios.');
+      setTimeout(aiShowQuickChips, 250);
+    }, 150);
+  }
+  if (isOpen) setTimeout(() => aiChatInput.focus(), 350);
+});
+
+aiBotClose.addEventListener('click', () => {
+  aiBotWindow.classList.remove('open');
+  aiBotToggle.classList.remove('active');
 });
 
 // ── Mobile menu (hamburger) ─────────────────────────
