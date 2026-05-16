@@ -1,6 +1,7 @@
 {
-  "outputDirectory": ".",
-  "rewrites": [
-    { "source": "/screenshots/:file", "destination": "/public/screenshots/:file" }
-  ]
+  "functions": {
+    "api/chat.js": {
+      "maxDuration": 30
+    }
+  }
 }
